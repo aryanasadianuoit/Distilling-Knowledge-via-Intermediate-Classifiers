@@ -1,4 +1,5 @@
 # Distilling Knowledge via Intermediate Classifier Heads (DIH)
+<p align="left">
 The crux of knowledge distillation—as a model
 compression and transfer-learning approach—is
 to train a resource-limited student model with
@@ -26,3 +27,4 @@ and datasets have demonstrated that the proposed
 approach outperforms the canonical knowledge
 distillation approach and its extensions, which are
 intended to address the capacity gap problem.
+  </p>
