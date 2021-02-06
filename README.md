@@ -1,2 +1,1 @@
-# dih
-Distilling Knowledge via Intermediate Classifier Heads (DIH)
+# Distilling Knowledge via Intermediate Classifier Heads (DIH)
