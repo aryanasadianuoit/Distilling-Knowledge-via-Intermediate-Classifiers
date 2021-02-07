@@ -7,13 +7,13 @@ the guide of a pre-trained larger teacher model
 to tighten the accuracy gap between the teacher
 and the student. However, when there is a large
 gap between the model complexities of teacher
-and student (also known as capacity gap), knowledge
+  and student (also known as <b>capacity gap</b>), knowledge
 distillation loses its strength in transferring
 knowledge from the teacher to the student, thus
 training a weaker student. To mitigate the impact
 of the capacity gap on knowledge distillation,
-we introduce knowledge distillation via intermediate
-heads. We first cheaply acquire a cohort
+we introduce <b>knowledge distillation via intermediate
+  heads</b>. We first cheaply acquire a cohort
 of pre-trained teachers with various model complexities,
 by extending the intermediate layers
 of the teacher (at various depth) with classifier
