@@ -31,9 +31,8 @@ intended to address the capacity gap problem.
   
   <section>
   <h2>Base Line</h2>
-  <p>Student= ResNet8, Teacher = ResNet110  </p>
-  <br>
-    <code>python3 test_dig.py --alpha 0.1  --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id 0  --lr 0.1 --schedule [60, 120, 180] --temperature 5 --wd 0 .0005
+  <p>Student=ResNet8, Teacher=ResNet110, CIFAR-100  </p>
+  <code>python3 test_dig.py --alpha 0.1  --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id 0  --lr 0.1 --schedule [60, 120, 180] --temperature 5 --wd 0 .0005
 </code>
   
 
