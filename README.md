@@ -28,3 +28,8 @@ approach outperforms the canonical knowledge
 distillation approach and its extensions, which are
 intended to address the capacity gap problem.
   </p>
+  
+  <section>
+  <h2>Base Line</h2>
+  <p>Student= ResNet8, Teacher = ResNet110</p>
+</section>
