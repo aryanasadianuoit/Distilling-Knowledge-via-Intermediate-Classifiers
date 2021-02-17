@@ -29,6 +29,23 @@ distillation approach and its extensions, which are
 intended to address the capacity gap problem.
   </p>
   
+  
+  
+  <section>
+  <h2>Requirements</h2>
+  <ul>
+  <li>torch==1.7.1</li>
+  <li>torchvision==0.8.2</li>
+  <li>tqdm==4.48.2</li>
+  <li>torchsummary</li>
+   <li>numpy==1.19.4</li>
+ </ul>
+  <code>pip install -r requirements.txt</code>
+  
+
+  
+</section>
+  
   <section>
   <h2>Base Line</h2>
   <p>Student=ResNet8, Teacher=ResNet110, CIFAR-100  </p>
