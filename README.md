@@ -5,6 +5,10 @@ Distilling Knowledge via Intermediate Classifier Heads (DIH) is a knowledge dist
   This approach improves the canonical knowledge distillation (KD) with the help of teacher's <b>intermediate representations</b>. First <b>k</b> classifier heads have to be mounted at various intermediate layers of the tecaher, and pass an <b>cheap</b> fine-tuning ( while the main teacher is forzen). Then, cohort of classifiers (all the mounted ones + the final main classifier) co-teach the student simultaneously with knowledge distillation.
   <br>
 Our experiments on various teacher-student pairs of models and datasets have demonstrated that the proposed approach outperforms the canonical knowledge distillation approach and its extensions, which are intended to address the capacity gap problem.
+  <br>
+  Fig
+  
+  <embed src="DIH_Scheme.pdf" width="800px" height="2100px" />
   </p>
   
   
