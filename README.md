@@ -19,13 +19,10 @@ Our experiments on various teacher-student pairs of models and datasets have dem
    <li>numpy==1.19.4</li>
  </ul>
   <code>pip install -r requirements.txt</code>
-  
-
-  
 </section>
   
   <section>
-  <h2>Base Line</h2>
+  <h2>Baseline</h2>
   <p>Student=ResNet8, Teacher=ResNet110, CIFAR-100  </p>
   <code>python3 test_dih.py --alpha 0.1  --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id 0  --lr 0.1 --schedule [60, 120, 180] --temperature 5 --wd 0 .0005
 </code>
