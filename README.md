@@ -8,7 +8,9 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <br>
   Fig
   
-  <embed src="DIH_Scheme.pdf" width="800px" height="2100px" />
+  <embed src="https://github.com/aryanasadianuoit/Distilling-Knowledge-via-Intermediate-Classifier-Heads-DIH-/blob/main/DIH_Scheme.pdf" width="800px" height="2100px" />
+  
+
   </p>
   
   
