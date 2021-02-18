@@ -22,7 +22,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <li>torchsummary</li>
    <li>numpy==1.19.4</li>
  </ul>
-  <code>pip install -r requirements.txt</code>
+  <code>pip3 install -r requirements.txt</code>
 </section>
   
   <section>
