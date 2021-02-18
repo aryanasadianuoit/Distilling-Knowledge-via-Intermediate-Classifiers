@@ -24,6 +24,14 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  </ul>
   <code>pip3 install -r requirements.txt</code>
 </section>
+
+<section>
+  <h2>Datasets</h2>
+   <ul>
+  <li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a></li>
+  <li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-100</a></li>
+ </ul>
+ </section>
   
   <section>
   <h2>Baseline</h2>
