@@ -1,8 +1,9 @@
 # Distilling Knowledge via Intermediate Classifier Heads (DIH)
 <style>
 img {
-  width: 80%;
-  height: 80%;
+  width: 60%;
+  height: 60%;
+  justify-content: center;
 }
 </style>
 <p text-align: justify>
