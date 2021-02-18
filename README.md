@@ -32,9 +32,15 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-100</a></li>
  </ul>
  </section>
+ 
+ <section>
+  <h2>Instructions</h2>
+  <li>First the a selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
+  <li></li>
+ </section>
   
   <section>
-  <h2>Baseline</h2>
+  <h2>Example</h2>
   <p>Student=ResNet8, Teacher=ResNet110, CIFAR-100  </p>
   <code>python3 test_dih.py --alpha 0.1  --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id 0  --lr 0.1 --schedule [60, 120, 180] --temperature 5 --wd 0 .0005
 </code>
