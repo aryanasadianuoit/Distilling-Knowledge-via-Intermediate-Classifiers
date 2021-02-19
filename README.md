@@ -36,8 +36,49 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  <section>
   <h2>Instructions</h2>
   <li>First the a selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
-  <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model are available in the following table.</li>
+  <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model are available in the following table.
+  <table style="width:400px">
+  <tr>
+  <th>Teacher Model</th>
+  <th># Intermediate heads (k)</th> 
+   </tr>
+    <tr>
+    <td>ResNet-34</td>
+    <td>4</td>
+    </tr>
+     <tr>
+    <td>ResNet-18</td>
+    <td>4</td>
+    </tr>
+     <tr>
+    <td>VGG-11</td>
+    <td>4</td>
+    </tr>
+     <tr>
+    <td>ResNet-110</td>
+    <td>3</td>
+    </tr>
+     <tr>
+    <td>ResNet-20</td>
+    <td>3</td>
+    </tr>
+    
+     <tr>
+    <td>ResNet-14</td>
+    <td>3</td>
+    </tr>
+    
+     <tr>
+    <td>ResNet-8</td>
+    <td>4</td>
+    </tr>
+</table>
+<br>
+  
+  
+  </li>
   <li>For training the selected student model with <b>DIH</b> the following template should be run:
+    <br>
      <code>python3 test_dih.py --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd </code>
   </li>
 </section>
