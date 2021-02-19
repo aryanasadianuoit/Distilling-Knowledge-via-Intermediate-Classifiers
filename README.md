@@ -75,9 +75,13 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   
   
   </li>
+  <li>For training a model with <b>regular cross-entropy</b> the following template should be run:
+    <br>
+     <code>python3 test.py --model  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
+  </li>
   <li>For training the selected student model with <b>DIH</b> the following template should be run:
     <br>
-     <code>python3 test_dih.py --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd </code>
+     <code>python3 test.py --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd --training_type ce --path_to_save</code>
   </li>
 </section>
   
