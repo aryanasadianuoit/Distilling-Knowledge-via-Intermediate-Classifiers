@@ -83,7 +83,83 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <br>
      <code>python3 test.py --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd --training_type ce --path_to_save</code>
   </li>
+  
+  
+  <section>
+   <h3> Hyper-parameters to set</h3>
+  <br>
+  
+  <table style="width:400px">
+  <tr>
+  <th>Hyper-parameter</th>
+  <th>args tag</th> 
+  <th>Default value</th> 
+   </tr>
+    <tr>
+    <td>student model</td>
+    <td>student</td>
+    <td>res8</td>
+    </tr>
+     <tr>
+    <td>teacher model</td>
+    <td>teacher</td>
+    <td>res110</td>
+    </tr>
+    <tr>
+    <td>learning rate</td>
+    <td>lr</td>
+    <td>0.1</td>
+    </tr>
+     <tr>
+    <td>weight decay</td>
+    <td>wd</td>
+    <td>5e-4</td>
+    </tr>
+     <tr>
+    <td>epochs</td>
+    <td>epochs</td>
+    <td>200</td>
+    </tr>
+     <tr>
+    <td>dataset</td>
+    <td>dataset</td>
+    <td>cifar10</td>
+    </tr>
+     <tr>
+    <td>schedule</td>
+    <td>schedule</td>
+    <td>[60,120,180]</td>
+    </tr>
+     <tr>
+    <td>temperature τ (KD)</td>
+    <td>kd_temperature</td>
+    <td>5</td>
+    </tr>
+     <tr>
+    <td>α (KD)</td>
+    <td>kd_alpha</td>
+    <td>0.1</td>
+    </tr>
+      <tr>
+    <td>batch size</td>
+    <td>batch_size</td>
+    <td>64</td>
+    </tr>
+     <tr>
+    <td>training type</td>
+    <td>training_type</td>
+    <td>dih</td>
+    </tr>
+</table>
+<br>
+  
+  
+  </section>
+  
+  
+  
 </section>
+
   
   <section>
   <h2>Example</h2>
