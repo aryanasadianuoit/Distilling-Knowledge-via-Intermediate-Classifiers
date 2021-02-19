@@ -166,7 +166,12 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <p>Student=ResNet8, Teacher=ResNet110, CIFAR-100  </p>
   <code>python3 test_dih.py --alpha 0.1  --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id 0  --lr 0.1 --schedule [60, 120, 180] --temperature 5 --wd 0 .0005
 </code>
-  
-
+ 
   
 </section>
+
+<section>
+  
+  <h2>Cite</h2>
+  <p>TBA</p>
+  </section>
