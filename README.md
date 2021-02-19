@@ -62,12 +62,10 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <td>ResNet-20</td>
     <td>3</td>
     </tr>
-    
      <tr>
     <td>ResNet-14</td>
     <td>3</td>
     </tr>
-    
      <tr>
     <td>ResNet-8</td>
     <td>4</td>
