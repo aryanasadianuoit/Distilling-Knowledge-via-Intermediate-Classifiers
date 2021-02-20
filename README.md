@@ -209,7 +209,6 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     
     
   </ul>
-  <p>Student=ResNet8, Teacher=ResNet110, CIFAR-100  </p>
   <code>python3 test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0 .0005 --path_to_save /home/dih_model.pth
 </code>
  
