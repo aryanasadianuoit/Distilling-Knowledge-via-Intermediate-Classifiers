@@ -190,8 +190,27 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   
   <section>
   <h2>Example</h2>
+  <ul>
+    <li>Student &#10145; ResNet 8</li>
+    <li>Teacher &#10145; ResNet 110</li>
+    <li>Training Type &#10145; DIH</li>
+    <li>Dataset &#10145; CIFAR10</li>
+    <li>Teacher's saved path &#10145; /home/teacher.pth</li>
+    <li>Intermediate header's saved path &#10145; /home/saved_headers/</li>
+    <li>Path for saving the model after training &#10145; /home/dih_model.pth</li>
+    <li>Changing the learning rate in epochs &#10145; [60,120,180]</li>
+    <li>Drop learning rate by multiplying to the factor  &#10145; 0.2</li>
+    <li>Initial learning rate &#10145; 0.1</li>
+    <li>Weight decay &#10145; 5e-4</li>
+    <li>Device &#10145; cuda:0</li>
+    <li>Batch size &#10145; 64</li>
+    <li>Temperature τ(KD & DIH) &#10145; 5</li>
+    <li> Alpha α (KD, DIH) &#10145; 0.1</li>
+    
+    
+  </ul>
   <p>Student=ResNet8, Teacher=ResNet110, CIFAR-100  </p>
-  <code>python3 test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id 0  --lr 0.1 --schedule [60, 120, 180] --wd 0 .0005 --path_to_save /home/dih_model.pth
+  <code>python3 test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0 .0005 --path_to_save /home/dih_model.pth
 </code>
  
   
