@@ -53,6 +53,10 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <td>4</td>
     </tr>
      <tr>
+    <td>VGG-11</td>
+    <td>4</td>
+    </tr>
+     <tr>
     <td>ResNet-110</td>
     <td>3</td>
     </tr>
@@ -92,13 +96,13 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <h3>Files in this repository</h3>
   
   <ul>
-  <li><code><b>dataload.py</b></code> &#10145; Loads the data loader for training, validation and testining for both datasets (CIFAR10-CIFAR100).</li>
-  <li><code><b>models.repo</b></code> &#10145; Contains models classes(two categories of ResNets), and also the <b>intermediate classifier module</b> creator.</li>
-  <li><code><b>KD_Loss.py</b></code> &#10145; Canonicl knowledge distillation loss function.</li>
-  <li><code><b>dih_utlis.py</b></code> &#10145; Includes the function for loading the trained intermediate heads.</li>
-  <li><code><b>train_dih.py</b></code> &#10145; Contains the function for <b> distillation vai intermediate heads (DIH) </b>.</li>
+  <li><code><b>dataload.py</b></code>    &#10145; Loads the data loader for training, validation and testining for both datasets (CIFAR10-CIFAR100).</li>
+  <li><code><b>models.repo</b></code>    &#10145; Contains models classes(two categories of ResNets, VGG, and also the <b>intermediate classifier module</b>).</li>
+  <li><code><b>KD_Loss.py</b></code>     &#10145; Canonicl knowledge distillation loss function.</li>
+  <li><code><b>dih_utlis.py</b></code>   &#10145; Includes the function for loading the trained intermediate heads.</li>
+  <li><code><b>train_dih.py</b></code>   &#10145; Contains the function for <b> distillation vai intermediate heads (DIH) </b>.</li>
   <li><code><b>train_funcs.py</b></code> &#10145; Regular cross-entropy training, and intermediate header's fine_tuning dunctions.</li>
-  <li><code><b>test.py</b></code> &#10145; testing console for running the functions above.</li>
+  <li><code><b>test.py</b></code>        &#10145; Testing console for running the functions above.</li>
 </ul
   
   
