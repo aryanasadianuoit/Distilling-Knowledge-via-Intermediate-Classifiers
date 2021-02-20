@@ -37,8 +37,8 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  
  <section>
   <h2>Instructions</h2>
-  <li>First the a selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
-  <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model are available in the following table.
+  <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
+  <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table.
   <table style="width:400px">
   <tr>
   <th>Teacher Model</th>
