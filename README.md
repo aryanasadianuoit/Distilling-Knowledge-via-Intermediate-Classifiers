@@ -141,7 +141,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
      <tr>
     <td>dataset</td>
     <td>dataset</td>
-    <td>cifar10</td>
+    <td>cifar100</td>
     </tr>
      <tr>
     <td>schedule</td>
