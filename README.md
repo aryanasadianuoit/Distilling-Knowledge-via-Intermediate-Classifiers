@@ -79,11 +79,15 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   </li>
   <li>For training a model with <b>regular cross-entropy</b> the following template should be run:
     <br>
-     <code>python3 test.py --model  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
+     <code>python3 test.py --training_type ce --teacher --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
+  </li>
+  <li>By having a trained teacher, we can fine_tuned all of its intermediate classifier heads by running the following command:
+    <br>
+     <code>python3 test.py --training_type fine_tune --teacher __saved_intermediates_directory --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
   </li>
   <li>For training the selected student model with <b>DIH</b> the following template should be run:
     <br>
-     <code>python3 test.py --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd --training_type ce --path_to_save</code>
+     <code>python3 test.py --student --teacher --saved_path --saved_intermediates_directory --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd --training_type dih --path_to_save</code>
   </li>
   
   
@@ -166,7 +170,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <section>
   <h2>Example</h2>
   <p>Student=ResNet8, Teacher=ResNet110, CIFAR-100  </p>
-  <code>python3 test.py --alpha 0.1  --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id 0  --lr 0.1 --schedule [60, 120, 180] --temperature 5 --wd 0 .0005
+  <code>python3 test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id 0  --lr 0.1 --schedule [60, 120, 180] --wd 0 .0005 --path_to_save /home/dih_model.pth
 </code>
  
   
