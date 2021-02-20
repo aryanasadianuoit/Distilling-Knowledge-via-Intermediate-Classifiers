@@ -148,6 +148,11 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <td>schedule</td>
     <td>[60,120,180]</td>
     </tr>
+    <tr>
+    <td>γ</td>
+    <td>schedule_gamma</td>
+    <td>0.2</td>
+    </tr>
      <tr>
     <td>temperature τ (KD)</td>
     <td>kd_temperature</td>
