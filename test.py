@@ -32,8 +32,6 @@ parser.add_argument('--teacher', default=None, type=str, help='The teacher model
 
 parser.add_argument('--path_to_save', default='./model.pth', type=str,
                     help='the path to save the model and/or headers after training')
-parser.add_argument('--headers_path', default='./saved_headers_path/', type=str,
-                    help='the directory of fine_tuned intermediate headers')
 parser.add_argument('--saved_path', default='/model.pth', type=str,
                     help='the path of the saved model')
 parser.add_argument('--saved_intermediates_directory', default='./saved_headers/', type=str,
@@ -156,7 +154,7 @@ if args.teacher != None:
             #load the fine_tuned intermediate headers
             trained_intermediate_heads = load_trained_intermediate_heads(core_model=teacher,
                                                                          core_model_saved_path=args.saved_path,
-                                                                         heads_directory=args.headers_path,
+                                                                         heads_directory=args.saved_intermediates_directory,
                                                                          num_classes=num_classes)
             #DIH distillation
             train_via_dih(student=student,
