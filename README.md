@@ -202,8 +202,8 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <li>Drop learning rate by multiplying to the factor  &#10145; 0.2</li>
     <li>Initial learning rate &#10145; 0.1</li>
     <li>Weight decay &#10145; 5e-4</li>
-    <li>Device &#10145; cuda:0</li>
-    <li>Batch size &#10145; 64</li>
+    <li>Device  &#10145; cuda:0</li>
+    <li>Batch size  &#10145; 64</li>
     <li>Temperature τ(KD & DIH) &#10145; 5</li>
     <li> Alpha α (KD, DIH) &#10145; 0.1</li>
     
