@@ -126,7 +126,8 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   
  <h3>Hyper-parameters to set</h3>
   <br>
-  <table style="width:400px" id="hypers_table>
+
+  <table style="width:400px" id="hypers_table">
   <tr>
   <th align="center">Hyper-parameter</th>
   <th align="center">args tag</th> 
