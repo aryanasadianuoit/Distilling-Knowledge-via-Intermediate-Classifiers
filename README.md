@@ -66,7 +66,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <div id="arch_table"><div>
       <br>
   <table style="width:400px" align="center">
-    <caption align="center">Table 1. The number of mounted intermediate classifier heads to the models used in this repository.</caption>
+    <caption style="text-align:center">Table 1. The number of mounted intermediate classifier heads to the models used in this repository.</caption>
   <tr>
   <th align="center">Teacher Model</th>
   <th align="center"># Intermediate heads (k)</th> 
