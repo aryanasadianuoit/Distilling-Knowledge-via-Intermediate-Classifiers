@@ -98,8 +98,8 @@ Our experiments on various teacher-student pairs of models and datasets have dem
        For training a model with <b>regular cross-entropy</b> the following template should be run:
     <br>
      <code>python3 test.py --training_type ce --teacher --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
-  <br>
-      </div>
+  </div>
+   <br>
   By having a trained teacher, we need to fine_tune all of its intermediate classifier heads by running the following command:
     <br>
      <code>python3 test.py --training_type fine_tune --teacher __saved_intermediates_directory --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
