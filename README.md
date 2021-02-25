@@ -133,7 +133,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     </tr>
      <tr>
     <td align="center">weight decay</td>
-    <td v>wd</td>
+    <td align="center">wd</td>
     <td align="center">5e-4</td>
     </tr>
      <tr>
