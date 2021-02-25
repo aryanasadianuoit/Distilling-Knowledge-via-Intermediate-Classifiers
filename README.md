@@ -10,8 +10,10 @@
   <li>The cohort of classifiers (all the mounted ones + the final main classifier) co-teach the student simultaneously with knowledge distillation.</li>
   </ol>
 Our experiments on various teacher-student pairs of models and datasets have demonstrated that the proposed approach outperforms the canonical knowledge distillation approach and its extensions, which are intended to address the capacity gap problem.
+  </section>
   <br>
-    <img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifier Heads (DIH)"width: 60% height: 60% justify-content: center>
+  <section>
+  <img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifier Heads (DIH)"width: 60% height: 60% justify-content: center>
   </section>
   <section>
   <h2>Requirements</h2>
@@ -36,7 +38,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  </section>
  
  <section>
-  <h2>Instructions</h2>
+  <h2>Run The Experiments</h2>
   <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table.
   <table style="width:400px">
@@ -96,13 +98,13 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <h3>Files in this repository</h3>
   
   <ul>
-  <li><code><b>dataload.py</b></code>    &#10145; Loads the data loader for training, validation, and testing for both datasets (CIFAR10-CIFAR100).</li>
-  <li><code><b>models_repo</b></code>    &#10145; Contains model classes(two categories of ResNets, VGG, and also the <b>intermediate classifier module</b>).</li>
-  <li><code><b>KD_Loss.py</b></code>     &#10145; Canonical knowledge distillation loss function.</li>
-  <li><code><b>dih_utlis.py</b></code>   &#10145; Includes the function for loading the trained intermediate heads.</li>
-  <li><code><b>train_dih.py</b></code>   &#10145; Contains the function for <b> distillation vai intermediate heads (DIH)</b>.</li>
-  <li><code><b>train_funcs.py</b></code> &#10145; Regular cross-entropy training, and intermediate header's fine_tuning functions.</li>
-  <li><code><b>test.py</b></code>        &#10145; Testing console for running the functions above.</li>
+  <li><code><b>dataload.py</b></code> loads the data loader for training, validation, and testing for both datasets (CIFAR10-CIFAR100).</li>
+  <li><code><b>models_repo</b></code> contains model classes(two categories of ResNets, VGG, and also the <b>intermediate classifier module</b>).</li>
+  <li><code><b>KD_Loss.py</b></code>  canonical knowledge distillation loss function.</li>
+  <li><code><b>dih_utlis.py</b></code> includes the function for loading the trained intermediate heads.</li>
+  <li><code><b>train_dih.py</b></code> contains the function for <b> distillation vai intermediate heads (DIH)</b>.</li>
+  <li><code><b>train_funcs.py</b></code> regular cross-entropy training, and intermediate header's fine_tuning functions.</li>
+  <li><code><b>test.py</b></code> testing console for running the functions above.</li>
 </ul
   
   
@@ -178,41 +180,15 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <td>dih</td>
     </tr>
 </table>
-<br>
-  
-  
+<br> 
   </section>
-  
-  
-  
 </section>
 
   
   <section>
   <h2>Example</h2>
-  <ul>
-    <li>Student &#10145; ResNet 8</li>
-    <li>Teacher &#10145; ResNet 110</li>
-    <li>Training Type &#10145; DIH</li>
-    <li>Dataset &#10145; CIFAR10</li>
-    <li>Teacher's saved path &#10145; /home/teacher.pth</li>
-    <li>Intermediate header's saved path &#10145; /home/saved_headers/</li>
-    <li>Path for saving the model after training &#10145; /home/dih_model.pth</li>
-    <li>Changing the learning rate in epochs &#10145; [60,120,180]</li>
-    <li>Drop learning rate by multiplying to the factor  &#10145; 0.2</li>
-    <li>Initial learning rate &#10145; 0.1</li>
-    <li>Weight decay &#10145; 5e-4</li>
-    <li>Device  &#10145; cuda:0</li>
-    <li>Batch size  &#10145; 64</li>
-    <li>Temperature τ(KD & DIH) &#10145; 5</li>
-    <li> Alpha α (KD, DIH) &#10145; 0.1</li>
-    
-    
-  </ul>
   <code>python3 test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0 .0005 --path_to_save /home/dih_model.pth
 </code>
- 
-  
 </section>
 
 <section>
