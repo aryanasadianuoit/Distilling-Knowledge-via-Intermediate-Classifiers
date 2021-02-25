@@ -32,13 +32,13 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <section>
   <h2>Requirements</h2>
   <ul>
-  <li>torch==1.7.1</li>
-  <li>torchvision==0.8.2</li>
-  <li>tqdm==4.48.2</li>
-  <li>torchsummary</li>
-   <li>numpy==1.19.4</li>
-    <li>argparse</li>
-    <li>os</li>
+  <li>torch==1.7.1 the project is built in PyTorch.</li>
+  <li>torchvision==0.8.2 used for datasets, and data preprocessing.</li>
+  <li>tqdm==4.48.2 for better visualization of training process.</li>
+  <li>torchsummary for invesitating the model's architecture.</li>
+   <li>numpy==1.19.4 used in preprocessing the dataset, adn showing examples.</li>
+    <li>argparse passsing the input variables for easy reproducibility.</li>
+    <li>os reading and writing the traine dmodel's weights.</li>
  </ul>
   <code>pip3 install -r requirements.txt</code>
 </section>
