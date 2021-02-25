@@ -22,8 +22,8 @@
   <br>
   <h3>DIH training pipeline</h3>
   <ol>
-  <li>First <b>k</b> classifier heads have to be mounted at various intermediate layers of the teacher.</li>
-  <li>The added intermediate classifier heads pass a <b>cheap</b> fine-tuning ( while the main teacher is frozen).</li>
+  <li>First <b>k</b> classifier heads have to be mounted to various intermediate layers of the teacher (see Table.<a href="#sushi""></a> for the structure of models, i.e., the location and also the value of <b>k</b> in this repository.</li>
+  <li>The added intermediate classifier heads pass a <b>cheap</b> fine-tuning (while the main teacher is frozen).</li>
   <li>The cohort of classifiers (all the mounted ones + the final main classifier) co-teach the student simultaneously with knowledge distillation.</li>
   </ol>
 Our experiments on various teacher-student pairs of models and datasets have demonstrated that the proposed approach outperforms the canonical knowledge distillation approach and its extensions, which are intended to address the capacity gap problem.
@@ -56,6 +56,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <h2>Running The Experiments</h2>
   <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table.
+    <div id="arch_table"><div>
   <table style="width:400px">
   <tr>
   <th align="center">Teacher Model</th>
