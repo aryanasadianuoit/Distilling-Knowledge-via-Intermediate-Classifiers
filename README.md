@@ -64,7 +64,8 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table. In this repository, we have mounted each an intermediate classifier head after every group of residual and/or bottleneck blocks in ResNet family  models, and after each max pooling layer for VGG-11 model (<strong>Note:</strong> the VGG model has been equipped with batch normalization).
     <br>
     <div id="arch_table"><div>
-  <table style="width:400px">
+      <br>
+  <table style="width:400px" align="center">
     <caption style="caption-side:bottom">Table 1. The number of mounted intermediate classifier heads to the models used in this repository.</caption>
   <tr>
   <th align="center">Teacher Model</th>
@@ -135,8 +136,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   
  <h3 id="hypers_section">Hyper-parameters to set</h3>
   <br>
-
-  <table style="width:400px" id="hypers_table">
+  <table style="width:400px" id="hypers_table" align="center">
   <caption>Table 2. list of all hyper-parameters, their argparse tags, and their assigned default values.</caption>
   <tr>
   <th align="center">Hyper-parameter</th>
