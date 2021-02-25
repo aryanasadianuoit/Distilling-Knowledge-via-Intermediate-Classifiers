@@ -13,6 +13,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   </section>
   <br>
   <section>
+  <br>
   <img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifier Heads (DIH)"width: 60% height: 60% justify-content: center>
   </section>
   <section>
