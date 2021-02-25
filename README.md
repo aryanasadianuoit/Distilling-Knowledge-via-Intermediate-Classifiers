@@ -93,22 +93,19 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     </tr>
 </table>
 <br>
- 
   </li>
-  <li>For training a model with <b>regular cross-entropy</b> the following template should be run:
+  For training a model with <b>regular cross-entropy</b> the following template should be run:
     <br>
      <code>python3 test.py --training_type ce --teacher --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
-  </li>
-  <li>By having a trained teacher, we can fine_tuned all of its intermediate classifier heads by running the following command:
+  <br>
+  By having a trained teacher, we can fine_tuned all of its intermediate classifier heads by running the following command:
     <br>
      <code>python3 test.py --training_type fine_tune --teacher __saved_intermediates_directory --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
-  </li>
-  <li>For training the selected student model with <b>DIH</b> the following template should be run:
+  <br>
+  For training the selected student model with <b>DIH</b> the following template should be run:
     <br>
      <code>python3 test.py --student --teacher --saved_path --saved_intermediates_directory --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd --training_type dih --path_to_save</code>
-  </li>
-  
-  
+  <br>
   <section>
   
   <h3>Files in this repository</h3>
