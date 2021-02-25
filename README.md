@@ -65,6 +65,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <br>
     <div id="arch_table"><div>
   <table style="width:400px">
+    <caption>Table 1. The number of mounted intermediate classifier heads to the models used in this repository.</caption>
   <tr>
   <th align="center">Teacher Model</th>
   <th align="center"># Intermediate heads (k)</th> 
@@ -136,6 +137,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <br>
 
   <table style="width:400px" id="hypers_table">
+  <caption>Table 2. list of all hyper-parameters, their argparse tags, and their assigned default values.</caption>
   <tr>
   <th align="center">Hyper-parameter</th>
   <th align="center">args tag</th> 
