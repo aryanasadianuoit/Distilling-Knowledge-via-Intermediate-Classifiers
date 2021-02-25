@@ -16,7 +16,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifier Heads (DIH)"width: 60% height: 60% justify-content: center>
   </section>
   <section>
-  ## Requirements
+  <h2>Requirements</h2>
   <ul>
   <li>torch==1.7.1</li>
   <li>torchvision==0.8.2</li>
@@ -30,7 +30,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 </section>
 
 <section>
-  ### Datasets
+  <h2>Datasets</h2>
    <ul>
   <li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a></li>
   <li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-100</a></li>
@@ -38,7 +38,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  </section>
  
  <section>
-  ## Run The Experiments
+  <h2>Run The Experiments</h2>
   <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table.
   <table style="width:400px">
@@ -94,7 +94,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   
   <section>
   
-  ### Files in this repository
+  <h3>Files in this repository</h3>
   
   <ul>
   <li><code><b>dataload.py</b></code> loads the data loader for training, validation, and testing for both datasets (CIFAR10-CIFAR100).</li>
@@ -107,7 +107,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 </ul
   <br>
   
-   ### Hyper-parameters to set
+ <h3>Hyper-parameters to set</h3>
   <br>
   <table style="width:400px">
   <tr>
