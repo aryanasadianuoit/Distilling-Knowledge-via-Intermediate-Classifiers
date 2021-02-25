@@ -14,9 +14,9 @@
   </ul>
   <h2>Introduction</h2>
 <p text-align: justify>
-  <b>Distilling Knowledge via Intermediate Classifier Heads (DIH)</b> is a knowledge distillation framework that specifically tries to mitigate the negative impact of <b>the capacity gap</b> between the teacher and the student model on knowledge distillation. This approach improves the canonical knowledge distillation (KD) with the help of the teacher's <b>intermediate representations</b>.
+  <b>Distilling Knowledge via Intermediate Classifier Heads (DIH)</b> is a knowledge distillation framework that specifically tries to mitigate the negative impact of <b>the capacity gap</b>, i.e., the difference in model complexity between the teacher and the student model on knowledge distillation. This approach improves the canonical knowledge distillation (KD) with the help of the teacher's <b>intermediate representations</b> (the outputs of some of the hidden layers).
   <br>
-  DIH pipeline:
+  <h3>DIH training pipeline</h3>
   <ol>
   <li>First <b>k</b> classifier heads have to be mounted at various intermediate layers of the teacher.</li>
   <li>The added intermediate classifier heads pass a <b>cheap</b> fine-tuning ( while the main teacher is frozen).</li>
