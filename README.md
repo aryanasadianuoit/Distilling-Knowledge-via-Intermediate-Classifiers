@@ -16,7 +16,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifier Heads (DIH)"width: 60% height: 60% justify-content: center>
   </section>
   <section>
-  <h2>Requirements</h2>
+  ## Requirements
   <ul>
   <li>torch==1.7.1</li>
   <li>torchvision==0.8.2</li>
@@ -30,7 +30,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 </section>
 
 <section>
-  <h2>Datasets</h2>
+  ### Datasets
    <ul>
   <li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a></li>
   <li><a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-100</a></li>
@@ -38,7 +38,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  </section>
  
  <section>
-  <h2>Run The Experiments</h2>
+  ## Run The Experiments
   <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table.
   <table style="width:400px">
@@ -76,8 +76,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     </tr>
 </table>
 <br>
-  
-  
+ 
   </li>
   <li>For training a model with <b>regular cross-entropy</b> the following template should be run:
     <br>
@@ -95,7 +94,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   
   <section>
   
-  <h3>Files in this repository</h3>
+  ### Files in this repository
   
   <ul>
   <li><code><b>dataload.py</b></code> loads the data loader for training, validation, and testing for both datasets (CIFAR10-CIFAR100).</li>
@@ -106,13 +105,10 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <li><code><b>train_funcs.py</b></code> regular cross-entropy training, and intermediate header's fine_tuning functions.</li>
   <li><code><b>test.py</b></code> testing console for running the functions above.</li>
 </ul
-  
-  
-  
-  <br>
-   <h3> Hyper-parameters to set</h3>
   <br>
   
+   ### Hyper-parameters to set
+  <br>
   <table style="width:400px">
   <tr>
   <th>Hyper-parameter</th>
