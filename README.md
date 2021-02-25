@@ -44,36 +44,36 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table.
   <table style="width:400px">
   <tr>
-  <th>Teacher Model</th>
+  <th align="center">Teacher Model</th>
   <th align="center"># Intermediate heads (k)</th> 
    </tr>
     <tr>
-    <td>ResNet-34</td>
-    <td>4</td>
+    <td align="center">ResNet-34</td>
+    <td align="center">4</td>
     </tr>
      <tr>
-    <td>ResNet-18</td>
-    <td>4</td>
+    <td align="center">ResNet-18</td>
+    <td align="center">4</td>
     </tr>
      <tr>
-    <td>VGG-11</td>
-    <td>4</td>
+    <td align="center">VGG-11</td>
+    <td align="center">4</td>
     </tr>
      <tr>
-    <td>ResNet-110</td>
-    <td>3</td>
+    <td align="center">ResNet-110</td>
+    <td align="center">3</td>
     </tr>
      <tr>
-    <td>ResNet-20</td>
-    <td>3</td>
+    <td align="center">ResNet-20</td>
+    <td align="center">3</td>
     </tr>
      <tr>
-    <td>ResNet-14</td>
-    <td>3</td>
+    <td align="center">ResNet-14</td>
+    <td align="center">3</td>
     </tr>
      <tr>
-    <td>ResNet-8</td>
-    <td>3</td>
+    <td align="center">ResNet-8</td>
+    <td align="center">3</td>
     </tr>
 </table>
 <br>
