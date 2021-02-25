@@ -2,7 +2,11 @@
 <section>
   <h2>Table of Contents:</h2>
   <ul>
-    <li><b>Introduction</b></li>
+    <li><b>Introduction</b>
+      <ul>
+        <li><b>DIH training pipeline</b></li>
+      </ul>
+    </li>
     <li><b>Datasets</b></li>
     <li><b>Running The Experiments</b>
       <ul>
