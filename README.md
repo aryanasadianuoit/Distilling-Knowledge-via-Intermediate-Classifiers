@@ -1,5 +1,22 @@
 # Distilling Knowledge via Intermediate Classifier Heads (DIH)
 <section>
+  <hr>
+  <h2>Table of Contents:</h2>
+  <ul>
+    <li>Introduction</li>
+    <li>Datasets</li>
+    <li>Running The Experiments
+      <ul>
+        <li>Files in this repository</li>
+        <li>Hyper-parameters to set</li>
+      </ul>
+    <li>Example</li>
+    </li>
+
+
+  </ul>
+  <br>
+  <hr>
 <p text-align: justify>
   <b>Distilling Knowledge via Intermediate Classifier Heads (DIH)</b> is a knowledge distillation framework that specifically tries to mitigate the negative impact of <b>the capacity gap</b> between the teacher and the student model on knowledge distillation. This approach improves the canonical knowledge distillation (KD) with the help of the teacher's <b>intermediate representations</b>.
   <br>
@@ -40,7 +57,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  </section>
  
  <section>
-  <h2>Run The Experiments</h2>
+  <h2>Running The Experiments</h2>
   <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table.
   <table style="width:400px">
