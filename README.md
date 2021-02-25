@@ -100,14 +100,17 @@ Our experiments on various teacher-student pairs of models and datasets have dem
      <code>python3 test.py --training_type ce --teacher --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
   </div>
    <br>
+      <div id="fine_tune_template">
   By having a trained teacher, we need to fine_tune all of its intermediate classifier heads by running the following command:
     <br>
      <code>python3 test.py --training_type fine_tune --teacher __saved_intermediates_directory --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
+      </div>
   <br>
+      <div id="dih_template">
   For training the selected student model with <b>DIH</b> the following template should be run:
     <br>
      <code>python3 test.py --student --teacher --saved_path --saved_intermediates_directory --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd --training_type dih --path_to_save</code>
-  <br>
+      </div>
   <section>
   
   <h3>Files in this repository</h3>
