@@ -2,25 +2,26 @@
 <section>
   <h2>Table of Contents:</h2>
   <ul>
-    <li><b>Introduction</b>
+    <li><a href="#introduction"><b>Introduction</b></a></li>
       <ul>
-        <li><b>DIH training pipeline</b></li>
+        <li> <a href="#dih_pipeline"><b>DIH training pipeline</b></a></li>
       </ul>
     </li>
-    <li><b>Datasets</b></li>
-    <li><b>Running The Experiments</b>
+  <li><a href="#datasets"><b>Datasets</b></a></li>
+  <li><a href="#">Baselines</a></li>
+  <li><a href="#run"><b>Running The Experiments</b></a></li>
       <ul>
-        <li><b>Files in this repository</b></li>
-        <li><b>Hyper-parameters to set</b></li>
+        <li><a href="#files"><b>Files in this repository</b></a></li>
+        <li><a href="#hypers_table"><b>Hyper-parameters to set</b></a></li>
       </ul>
-    <li><b>Example</b></li>
+  <li><a href="#examples"><b>Example</b></a></li>
     </li>
   </ul>
-  <h2>Introduction</h2>
+  <h2 id="introduction">Introduction</h2>
 <p text-align: justify>
   <b>Distilling Knowledge via Intermediate Classifier Heads (DIH)</b> is a knowledge distillation framework that specifically tries to mitigate the negative impact of <b>the capacity gap</b>, i.e., the difference in model complexity between the teacher and the student model on knowledge distillation. This approach improves the canonical knowledge distillation (KD) with the help of the teacher's <b>intermediate representations</b> (the outputs of some of the hidden layers).
   <br>
-  <h3>DIH training pipeline</h3>
+  <h3 id="dih_pipeline">DIH training pipeline</h3>
   <ol>
   <li>First <b>k</b> classifier heads have to be mounted to various intermediate layers of the teacher (see <a href="#arch_table"">Table</a> for the structure of models, i.e., the location and also the value of <b>k</b> in this repository.</li>
   <li>The added intermediate classifier heads pass a <b>cheap, and efficient</b> fine-tuning (while the main teacher is frozen). The fine-tuning step is quite cheaper and more efficient than training a whole model (i.e., a fraction of teacher model , and the added intermediate classifier head module) from scratch. This is due to the frozen state of the backbone of the model, i.e., inly the added intermediate head needs to be trained.</li>
@@ -48,12 +49,12 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 </section>
 
 <section>
-  <h2>Datasets</h2>
+  <h2 id="datasets">Datasets</h2>
   <a href="https://www.cs.toronto.edu/~kriz/cifar.html"><b>CIFAR-10</b></a>, and <a href="https://www.cs.toronto.edu/~kriz/cifar.html"><b>CIFAR-100</b></a>  contain 32x32 pixel RGB images for 10 and 100 classes respectively. The datasets composed of 50,000 training and 10,000 testing images. All training and testing datasets are balanced (i.e., the number of images per class is the same within the dataset). For these two datasets, the images are augmented by the combination of horizontal flips, 4 pixels padding, and random crops. We also normalized the images by their mean and standard deviation. 
  </section>
  
  <section>
-  <h2>Running The Experiments</h2>
+  <h2 id="run">Running The Experiments</h2>
   <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned in <a href="#hypers_table">Table 2</a>.</li>
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table. In this repository, we have mounted each an intermediate classifier head after every group of residual and/or bottleneck blocks in ResNet family  models, and after each max pooling layer for VGG-11 model (<strong>Note:</strong> the VGG model has been equipped with batch normalization).
     <br>
@@ -113,7 +114,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
       </div>
   <section>
   
-  <h3>Files in this repository</h3>
+  <h3 id="files">Files in this repository</h3>
   
   <ul>
   <li><code><b>dataload.py</b></code> loads the data loader for training, validation, and testing for both datasets (CIFAR10-CIFAR100).</li>
@@ -202,7 +203,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 
   
   <section>
-  <h2>Example</h2>
+  <h2 id="examples">Example</h2>
   <code>python3 test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0 .0005 --path_to_save /home/dih_model.pth
 </code>
 </section>
