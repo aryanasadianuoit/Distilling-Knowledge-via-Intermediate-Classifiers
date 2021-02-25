@@ -8,7 +8,7 @@
       </ul>
     </li>
   <li><a href="#datasets"><b>Datasets</b></a></li>
-  <li><a href="#baselines">Baselines</a></li>
+  <li><a href="#baselines"><b>Baselines</b></a></li>
   <li><a href="#run"><b>Running The Experiments</b></a></li>
       <ul>
         <li><a href="#files"><b>Files in this repository</b></a></li>
