@@ -23,7 +23,7 @@
   <br>
   <h3 id="dih_pipeline">DIH training pipeline</h3>
   <ol>
-  <li>First <b>k</b> classifier heads have to be mounted to various intermediate layers of the teacher (see <a href="#arch_table"">Table</a> for the structure of models, i.e., the location and also the value of <b>k</b> in this repository.</li>
+  <li>First <b>k</b> classifier heads have to be mounted to various intermediate layers of the teacher (see <a href="#arch_table"">Table 1</a> for the structure of models, i.e., the location and also the value of <b>k</b> in this repository.</li>
   <li>The added intermediate classifier heads pass a <b>cheap, and efficient</b> fine-tuning (while the main teacher is frozen). The fine-tuning step is quite cheaper and more efficient than training a whole model (i.e., a fraction of teacher model , and the added intermediate classifier head module) from scratch. This is due to the frozen state of the backbone of the model, i.e., inly the added intermediate head needs to be trained.</li>
   <li>The cohort of classifiers (all the mounted ones + the final main classifier) co-teach the student simultaneously with knowledge distillation.</li>
   </ol>
