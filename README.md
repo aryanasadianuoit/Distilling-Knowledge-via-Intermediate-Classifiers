@@ -8,11 +8,11 @@
       </ul>
     </li>
   <li><a href="#datasets"><b>Datasets</b></a></li>
-  <li><a href="#">Baselines</a></li>
+  <li><a href="#baselines">Baselines</a></li>
   <li><a href="#run"><b>Running The Experiments</b></a></li>
       <ul>
         <li><a href="#files"><b>Files in this repository</b></a></li>
-        <li><a href="#hypers_table"><b>Hyper-parameters to set</b></a></li>
+        <li><a href="#hypers_section"><b>Hyper-parameters to set</b></a></li>
       </ul>
   <li><a href="#examples"><b>Example</b></a></li>
     </li>
@@ -51,6 +51,10 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 <section>
   <h2 id="datasets">Datasets</h2>
   <a href="https://www.cs.toronto.edu/~kriz/cifar.html"><b>CIFAR-10</b></a>, and <a href="https://www.cs.toronto.edu/~kriz/cifar.html"><b>CIFAR-100</b></a>  contain 32x32 pixel RGB images for 10 and 100 classes respectively. The datasets composed of 50,000 training and 10,000 testing images. All training and testing datasets are balanced (i.e., the number of images per class is the same within the dataset). For these two datasets, the images are augmented by the combination of horizontal flips, 4 pixels padding, and random crops. We also normalized the images by their mean and standard deviation. 
+ </section>
+ <section
+ <h2 id="baselines">Baselines</h2>
+ <p>TBA</p>
  </section>
  
  <section>
@@ -127,7 +131,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 </ul
   <br>
   
- <h3>Hyper-parameters to set</h3>
+ <h3 id="hypers_section">Hyper-parameters to set</h3>
   <br>
 
   <table style="width:400px" id="hypers_table">
