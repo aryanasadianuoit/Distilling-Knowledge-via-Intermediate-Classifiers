@@ -45,7 +45,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <table style="width:400px">
   <tr>
   <th>Teacher Model</th>
-  <th># Intermediate heads (k)</th> 
+  <th align="center"># Intermediate heads (k)</th> 
    </tr>
     <tr>
     <td>ResNet-34</td>
