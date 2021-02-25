@@ -45,8 +45,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 
 <section>
   <h2>Datasets</h2>
-   <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a> contains 32x32 pixel RGB images for $10$ classes.
-  <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-100</a> contains 32x32 pixel RGB images for $100$ classes. 
+  <a href="https://www.cs.toronto.edu/~kriz/cifar.html"><b>CIFAR-10</b></a>, and <a href="https://www.cs.toronto.edu/~kriz/cifar.html"><b>CIFAR-100</b></a>  contain 32x32 pixel RGB images for 10 and 100 classes respectively. 
  The datasets composed of $50,000$ training and $10,000$ testing images. All training and testing datasets are balanced (i.e., the number of images per class is the same within the dataset). For these two datasets, the images are augmented by the combination of horizontal flips, 4 pixels padding, and random crops. We also normalized the images by their mean and standard deviation. 
  </section>
  
