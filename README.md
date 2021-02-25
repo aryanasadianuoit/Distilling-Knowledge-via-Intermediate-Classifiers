@@ -112,69 +112,69 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <br>
   <table style="width:400px">
   <tr>
-  <th>Hyper-parameter</th>
-  <th>args tag</th> 
-  <th>Default value</th> 
+  <th align="center">Hyper-parameter</th>
+  <th align="center">args tag</th> 
+  <th align="center">Default value</th> 
    </tr>
     <tr>
-    <td>student model</td>
-    <td>student</td>
-    <td>res8</td>
+    <td align="center">student model</td>
+    <td align="center">student</td>
+    <td align="center">res8</td>
     </tr>
      <tr>
-    <td>teacher model</td>
-    <td>teacher</td>
-    <td>res110</td>
+    <td align="center">teacher model</td>
+    <td align="center">teacher</td>
+    <td align="center">res110</td>
     </tr>
     <tr>
-    <td>learning rate</td>
-    <td>lr</td>
-    <td>0.1</td>
+    <td align="center">learning rate</td>
+    <td align="center">lr</td>
+    <td align="center">0.1</td>
     </tr>
      <tr>
-    <td>weight decay</td>
-    <td>wd</td>
-    <td>5e-4</td>
+    <td align="center">weight decay</td>
+    <td v>wd</td>
+    <td align="center">5e-4</td>
     </tr>
      <tr>
-    <td>epochs</td>
-    <td>epochs</td>
-    <td>200</td>
+    <td align="center">epochs</td>
+    <td align="center">epochs</td>
+    <td align="center">200</td>
     </tr>
      <tr>
-    <td>dataset</td>
-    <td>dataset</td>
-    <td>cifar100</td>
+    <td align="center">dataset</td>
+    <td align="center">dataset</td>
+    <td align="center">cifar100</td>
     </tr>
      <tr>
-    <td>schedule</td>
-    <td>schedule</td>
-    <td>[60,120,180]</td>
+    <td align="center">schedule</td>
+    <td align="center">schedule</td>
+    <td align="center">[60,120,180]</td>
     </tr>
     <tr>
-    <td>γ</td>
-    <td>schedule_gamma</td>
-    <td>0.2</td>
+    <td align="center">γ</td>
+    <td align="center">schedule_gamma</td>
+    <td align="center">0.2</td>
     </tr>
      <tr>
-    <td>temperature τ (KD)</td>
-    <td>kd_temperature</td>
-    <td>5</td>
+    <td align="center">temperature τ (KD)</td>
+    <td align="center">kd_temperature</td>
+    <td align="center">5</td>
     </tr>
      <tr>
-    <td>α (KD)</td>
-    <td>kd_alpha</td>
-    <td>0.1</td>
+    <td align="center">α (KD)</td>
+    <td align="center">kd_alpha</td>
+    <td align="center">0.1</td>
     </tr>
       <tr>
-    <td>batch size</td>
-    <td>batch_size</td>
-    <td>64</td>
+    <td align="center">batch size</td>
+    <td align="center">batch_size</td>
+    <td align="center">64</td>
     </tr>
      <tr>
-    <td>training type</td>
-    <td>training_type</td>
-    <td>dih</td>
+    <td align="center">training type</td>
+    <td align="center">training_type</td>
+    <td align="center">dih</td>
     </tr>
 </table>
 <br> 
