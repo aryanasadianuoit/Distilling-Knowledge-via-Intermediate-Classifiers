@@ -22,7 +22,7 @@
   <br>
   <h3>DIH training pipeline</h3>
   <ol>
-  <li>First <b>k</b> classifier heads have to be mounted to various intermediate layers of the teacher (see Table.<a href="#sushi""></a> for the structure of models, i.e., the location and also the value of <b>k</b> in this repository.</li>
+  <li>First <b>k</b> classifier heads have to be mounted to various intermediate layers of the teacher (see <a href="#arch_table"">Table</a> for the structure of models, i.e., the location and also the value of <b>k</b> in this repository.</li>
   <li>The added intermediate classifier heads pass a <b>cheap</b> fine-tuning (while the main teacher is frozen).</li>
   <li>The cohort of classifiers (all the mounted ones + the final main classifier) co-teach the student simultaneously with knowledge distillation.</li>
   </ol>
