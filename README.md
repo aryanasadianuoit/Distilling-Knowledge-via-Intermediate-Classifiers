@@ -181,7 +181,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <tr>
     <td align="center">γ</td>
     <td align="center">schedule_gamma</td>
-    <td align="center">0.2</td>
+    <td align="center">0.1</td>
     </tr>
      <tr>
     <td align="center">temperature τ (KD)</td>
