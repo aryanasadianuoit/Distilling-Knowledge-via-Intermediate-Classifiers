@@ -55,7 +55,8 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  <section>
   <h2>Running The Experiments</h2>
   <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned above.</li>
-  <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table.
+  <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table. In this repository, we have mounted each an intermediate classifier head after every group of residual and/or bottleneck blocks in ResNet family  models, and after each max pooling layer for VGG-11 model (<strong>Note:</strong> the VGG model has been equipped with batch normalization).
+    <br>
     <div id="arch_table"><div>
   <table style="width:400px">
   <tr>
