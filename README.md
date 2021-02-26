@@ -55,7 +55,12 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  
  <section>
  <h2 id="baselines">Baselines</h2>
- <p>TBA</p>
+  <ol>
+    <li><a href="https://arxiv.org/pdf/1503.02531.pdf">Canonical Knowledge Distillation <b>(KD)</b></a></li> As one of the benchmarks, we use conventional knowledge distillation (in the context and the experiments, we have refered to canonical knowledge distillation as <b>KD</b>). We used the same temperature (τ=5), and same alpha weight(α=0.1) as DIH.
+    <li><a href="https://arxiv.org/pdf/1412.6550.pdf"><b>FitNets</b></a></li> FitNets as a knowledge distillation framework, first transfers the knowledge of a fraction of a trained teacher model up to a selected layer (known as <b>hint layer</b>) to a fraction of a student model up to a selected intermediate layer (called <b>guided layer</b>). This step optimizes the selected fraction of the student by using the <b>L<sub>2</sub> loss objective</b>. The second step of FitNets, is the canonical knowledge distillation (KD) to transfer the knowledge from the complete teacher to the complete student. For the first step, we trained the selected fraction of the student for 40 epochs using L<sub>2</sub> loss function. In the second step, we used the same setting for KD and we trained the complete student model for 200 epochs.
+    <li><a href="https://arxiv.org/pdf/1902.03393.pdf">Knowledge Distillation with Teacher Assistants <b>(TAKD)</b></a></li> We limited the number of teacher assistants to 1 for each experiment. The setting for training the teacher assistant and the final student is identical (the same setting for KD).
+    <li><a href="https://arxiv.org/pdf/1706.00384.pdf">Deep Mutual Learning <b>(DML)</b></a></li> besides the previous benchmarks which are categorized as <b>offline KD</b> (i.e., the student is supervised by a fully trained teacher model), we also used deep mutual learning to evaluate our model with one of its online distillation counterparts (a scenario where there is no trained teacher, i.e., the teacher and the student co-teach each other). We set the same setting as KD, except we set the temperature (τ=1).
+  </ol>
  </section>
  
  <section>
