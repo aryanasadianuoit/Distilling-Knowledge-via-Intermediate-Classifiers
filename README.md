@@ -107,41 +107,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 </table>
 <br>
   </li>
-      <div id="ce_template">
-       For training a model with <b>regular cross-entropy</b> the following template should be run:
-    <br>
-     <code>python3 final_test.py --training_type ce --teacher --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
-  </div>
-   <br>
-      <div id="fine_tune_template">
-        By having a trained teacher, we need to <b>fine_tune</b> all of its intermediate classifier heads by running the following command:
-    <br>
-     <code>python3 final_test.py  --training_type fine_tune --teacher __saved_intermediates_directory --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
-      </div>
-  <br>
-        <div id="fitents">
-          For evaluation, we used <b>FitNets</b>. To train a student with this approach, this template should be runned:
-    <br>
-     <code>python3 final_test.py --student --training_type fitnets --teacher --saved_path --path_to_save --epochs_fitnets_1  nesterov_fitnets_1  --momentum_fitnets_1 --lr_fitnets_1 --wd_fitnets_1  --schedule_fitnets_1 --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
-      </div>
-  <br>
-         <div id="dml">
-       As another baseline, one can train a cohort of two models (student and the teacher) as a cohort via <b>deep mutual learning (DML)</b>, by the following template:
-    <br>
-     <code>python3 final_test.py --student --training_type dml --teacher --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
-      </div>
-  <br>
-            <div id="kd">
-              The canonical <b>knowledge distillation (KD)</b> is available through the following command:  
-    <br>
-     <code>python3 final_test.py --student --training_type kd --teacher --saved_path --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
-      </div>
-  <br>
-      <div id="dih_template">
-  For training the selected student model with <b>DIH</b> the following template should be run:
-    <br>
-     <code>python3 final_test.py --student --teacher --saved_path --saved_intermediates_directory --alpha  --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --temperature  --wd --training_type dih --path_to_save</code>
-      </div>
+      
   <section>
   
   <h3 id="files">Files in this repository</h3>
@@ -234,7 +200,39 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   
   <section>
   <h2 id="examples">Example</h2>
-  <code>python3 final_test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0 .0005 --path_to_save /home/dih_model.pth
+  </li>
+      <div id="ce_template">
+       For training a model with <b>regular cross-entropy</b> the following template should be run:
+    <br>
+     <code>python3 final_test.py --training_type ce --teacher res110 --path_to_save /home/teacher.pth --batch_size 64 --dataset cifar100 --epochs 200 --gpu_id cuda:0 --lr 0.1 --schedule [60,120,180] --wd 0.0005</code>
+  </div>
+   <br>
+      <div id="fine_tune_template">
+        By having a trained teacher, we need to <b>fine_tune</b> all of its intermediate classifier heads by running the following command:
+    <br>
+     <code>python3 final_test.py  --training_type fine_tune --teacher res110 --path_to_save /home/headers --batch_size 64 --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 </code>
+      </div>
+  <br>
+        <div id="fitents">
+          For evaluation, we used <b>FitNets</b>. To train a student with this approach, this template should be runned:
+    <br>
+     <code>python3 final_test.py --student res8 --training_type fitnets --teacher res110 --saved_path /home/teacher.pth  --path_to_save /home/stage_1.pth --epochs_fitnets_1 40  nesterov_fitnets_1 True --momentum_fitnets_1 0.9 --lr_fitnets_1 0.1 --wd_fitnets_1 0.0005 --batch_size 64  --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005</code>
+      </div>
+  <br>
+         <div id="dml">
+       As another baseline, one can train a cohort of two models (student and the teacher) as a cohort via <b>deep mutual learning (DML)</b>, by the following template:
+    <br>
+     <code>python3 final_test.py --student res8 --training_type dml --teacher res110 --path_to_save /home/dml --batch_size 64 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,160] --wd 0.0005 --alpha 0.1 --temperature 1</code>
+      </div>
+  <br>
+            <div id="kd">
+              The canonical <b>knowledge distillation (KD)</b> is available through the following command:  
+    <br>
+     <code>python3 final_test.py --student res8 --training_type kd --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 64 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --temperature 5 </code>
+      </div>
+  <br> 
+  The student Resnet-8 can be trained via <b>DIH</b> through the following command:
+  <code>python3 final_test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0.0005 --path_to_save /home/dih_model.pth
 </code>
 </section>
 
