@@ -120,7 +120,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
       </div>
   <br>
         <div id="fitents">
-       For evaluation, we used FitNets. To train a student with this approach, this template should be runned:
+          For evaluation, we used <b>FitNets</b>. To train a student with this approach, this template should be runned:
     <br>
      <code>python3 final_test.py --student --training_type fitnets --teacher --saved_path --path_to_save --epochs_fitnets_1  nesterov_fitnets_1  --momentum_fitnets_1 --lr_fitnets_1 --wd_fitnets_1  --schedule_fitnets_1 --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
       </div>
@@ -132,7 +132,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
       </div>
   <br>
             <div id="kd">
-       The canonical knowledge distillation (KD) is available through the following command:  
+              The canonical <b>knowledge distillation (KD)</b> is available through the following command:  
     <br>
      <code>python3 final_test.py --student --training_type kd --teacher --saved_path --path_to_save --batch_size  --dataset  --epochs --gpu_id  --lr --schedule --wd </code>
       </div>
