@@ -66,6 +66,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  <section>
   <h2 id="run">Running The Experiments</h2>
   <li>First, the selected teacher model should be trained with regular cross-entropy with the hyper-parameters mentioned in <a href="#hypers_table">Table 2</a>.</li>
+  <li>In the reported experiments, we have used three different seed values (3,10,21). All the experiments in the paper except those reported in Table 3 of the paper, are the average of three different runs.</li>
   <li>For each selected teacher, a number of mounted <b>intermediate classifier heads</b> need to be fine-tuned. The number of added intermediate heads for each model is available in the following table. In this repository, we have mounted each an intermediate classifier head after every group of residual and/or bottleneck blocks in ResNet family  models, and after each max pooling layer for VGG-11 model (<strong>Note:</strong> the VGG model has been equipped with batch normalization).
     <br>
     <div id="arch_table"><div>
@@ -195,7 +196,6 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <tr>
     <td align="center">seed</td>
     <td align="center">seed</td>
-    <td align="center">3 (3,10,21)</td>
     </tr>
 </table>
 <br> 
@@ -237,7 +237,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
       </div>
   <br> 
   The student Resnet-8 can be trained via <b>DIH</b> through the following command:
-  <code>python3 final_test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0.0005 --path_to_save /home/dih_model.pth
+  <code>python3 final_test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0.0005 --seed 3 --path_to_save /home/dih_model.pth
 </code>
 </section>
 
