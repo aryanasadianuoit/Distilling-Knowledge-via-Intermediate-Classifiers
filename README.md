@@ -192,11 +192,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <td align="center">training type</td>
     <td align="center">training_type</td>
     <td align="center">dih</td>
-    </tr>
-    <tr>
-    <td align="center">seed</td>
-    <td align="center">seed</td>
-    </tr>
+  </tr>
 </table>
 <br> 
   </section>
