@@ -15,6 +15,7 @@
         <li><a href="#hypers_section"><b>Hyper-parameters to set</b></a></li>
       </ul>
   <li><a href="#examples"><b>Example</b></a></li>
+  <li><a href="#ref"><b>Reference</b></a></li>
     </li>
   </ul>
   <h2 id="introduction">Introduction</h2>
@@ -239,8 +240,12 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 
 <section>
   
-  <h2>Cite</h2>
-  <code>
-  TBA
-  </code>
+  <h2>Reference</h2>
+  <p>
+  arxiv link: <a href="http://arxiv.org/abs/2103.00497">http://arxiv.org/abs/2103.00497</a><br>
+  If you found this library useful in your research, please consider citing:
+  <br>
+  <div></div>
+  
+ </p>
   </section>
