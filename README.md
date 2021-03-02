@@ -247,16 +247,16 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <br>
   <div>
 </div>
-<code>
-  @misc{asadian2021distilling,</code><br>
-      <code>title={Distilling Knowledge via Intermediate Classifier Heads},</code> <br>
-      <code>author={Aryan Asadian and Amirali Salehi-Abari},</code><br>
-      <code>year={2021},</code><br>
-      <code>eprint={2103.00497},</code><br>
-      <code>archivePrefix={arXiv},</code><br>
-      <code>primaryClass={cs.LG}</code><br>
-<code>}</code><br>
-  </code>
+<p>
+  @misc{asadian2021distilling,<br>
+      title={Distilling Knowledge via Intermediate Classifier Heads},<br>
+      author={Aryan Asadian and Amirali Salehi-Abari},<br>
+      <code>year={2021},<br>
+      <code>eprint={2103.00497},<br>
+      <code>archivePrefix={arXiv},<br>
+      <code>primaryClass={cs.LG}<br>
+        }<br>
+  </p>
   
  </p>
   </section>
