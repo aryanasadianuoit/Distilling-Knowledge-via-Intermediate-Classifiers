@@ -240,5 +240,12 @@ Our experiments on various teacher-student pairs of models and datasets have dem
 <section>
   
   <h2>Cite</h2>
-  <p>TBA</p>
+  <p>@misc{asadian2021distilling,
+      title={Distilling Knowledge via Intermediate Classifier Heads}, 
+      author={Aryan Asadian and Amirali Salehi-Abari},
+      year={2021},
+      eprint={2103.00497},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}</p>
   </section>
