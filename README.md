@@ -251,11 +251,11 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   @misc{asadian2021distilling,<br>
       title={Distilling Knowledge via Intermediate Classifier Heads},<br>
       author={Aryan Asadian and Amirali Salehi-Abari},<br>
-      <code>year={2021},<br>
-      <code>eprint={2103.00497},<br>
-      <code>archivePrefix={arXiv},<br>
-      <code>primaryClass={cs.LG}<br>
-        }<br>
+      year={2021},<br>
+      eprint={2103.00497},<br>
+      archivePrefix={arXiv},<br>
+      primaryClass={cs.LG}<br>
+      }
   </p>
   
  </p>
