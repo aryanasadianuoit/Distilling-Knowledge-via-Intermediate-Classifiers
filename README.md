@@ -247,7 +247,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <br>
   <div>
 </div>
-<p>
+<p style="color:#b7bcc4;">
   @misc{asadian2021distilling,<br>
       title={Distilling Knowledge via Intermediate Classifier Heads},<br>
       author={Aryan Asadian and Amirali Salehi-Abari},<br>
