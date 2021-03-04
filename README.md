@@ -116,7 +116,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   
   <ul>
   <li><code><b>dataload.py</b></code> loads the data loader for training, validation, and testing for both datasets (CIFAR10-CIFAR100).</li>
-  <li><code><b>models_repo</b></code> contains model classes(two categories of ResNets, VGG, and also the <b>intermediate classifier module</b>).</li>
+  <li><code><b>models_repo</b></code> contains model classes(two categories of ResNets, VGG, and also the intermediate classifier module).</li>
   <li><code><b>KD_Loss.py</b></code>  canonical knowledge distillation loss function.</li>
   <li><code><b>dih_utlis.py</b></code> includes the function for loading the trained intermediate heads.</li>
   <li><code><b>train_dih.py</b></code> contains the function for <b> distillation vai intermediate heads (DIH)</b>.</li>
