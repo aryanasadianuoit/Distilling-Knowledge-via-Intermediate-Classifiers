@@ -119,7 +119,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <li><code><b>models_repo</b></code> contains model classes(two categories of ResNets, VGG, and also the intermediate classifier module).</li>
   <li><code><b>KD_Loss.py</b></code>  canonical knowledge distillation loss function.</li>
   <li><code><b>dih_utlis.py</b></code> includes the function for loading the trained intermediate heads.</li>
-  <li><code><b>train_dih.py</b></code> contains the function for <b> distillation vai intermediate heads (DIH)</b>.</li>
+  <li><code><b>train_dih.py</b></code> contains the function for distillation via intermediate heads <b>(DIH)</b>.</li>
   <li><code><b>train_funcs.py</b></code> regular cross-entropy training, and intermediate header's fine_tuning functions.</li>
   <li><code><b>test.py</b></code> testing console for running the functions above.</li>
 </ul
