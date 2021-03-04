@@ -20,12 +20,12 @@
   </ul>
   <h2 id="introduction">Introduction</h2>
 <p text-align: justify>
-  <b>Distilling Knowledge via Intermediate Classifier Heads (DIH)</b> is a knowledge distillation framework that specifically tries to mitigate the negative impact of <b>the capacity gap</b>, i.e., the difference in model complexity between the teacher and the student model on knowledge distillation. This approach improves the canonical knowledge distillation (KD) with the help of the teacher's <b>intermediate representations</b> (the outputs of some of the hidden layers).
+  <b>Distilling Knowledge via Intermediate Classifier Heads (DIH)</b> is a knowledge distillation framework that specifically tries to mitigate the negative impact of <i>the capacity gap</i>, i.e., the difference in model complexity between the teacher and the student model on knowledge distillation. This approach improves the canonical knowledge distillation (KD) with the help of the teacher's <i>intermediate representations</i> (the outputs of some of the hidden layers).
   <br>
   <h3 id="dih_pipeline">DIH training pipeline</h3>
   <ol>
   <li>First <b>k</b> classifier heads have to be mounted to various intermediate layers of the teacher (see <a href="#arch_table"">Table 1</a> for the structure of models, i.e., the location and also the value of <b>k</b> in this repository).</li>
-  <li>The added intermediate classifier heads pass a <b>cheap, and efficient</b> fine-tuning (while the main teacher is frozen). The fine-tuning step is quite cheaper and more efficient than training a whole model (i.e., a fraction of teacher model , and the added intermediate classifier head module) from scratch. This is due to the frozen state of the backbone of the model, i.e., inly the added intermediate head needs to be trained.</li>
+  <li>The added intermediate classifier heads pass a cheap and efficient fine-tuning (while the main teacher is frozen). The fine-tuning step is quite cheaper and more efficient than training a whole model (i.e., a fraction of teacher model , and the added intermediate classifier head module) from scratch. This is due to the frozen state of the backbone of the model, i.e., inly the added intermediate head needs to be trained.</li>
   <li>The cohort of classifiers (all the mounted ones + the final main classifier) co-teach the student simultaneously with knowledge distillation.</li>
   </ol>
 Our experiments on various teacher-student pairs of models and datasets have demonstrated that the proposed approach outperforms the canonical knowledge distillation approach and its extensions, which are intended to address the capacity gap problem.
@@ -33,16 +33,16 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <br>
   <section>
   <br>
-  <img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifier Heads (DIH)" width="1000" height="600" justify-content: center>
+  <img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifier Heads (DIH)" width="800" height="600" justify-content: center>
   </section>
   <section>
   <h2>Requirements</h2>
   <ul>
-    <li><b>torch==1.7.1</b> the project is built in PyTorch.</li>
-    <li> <b>torchvision==0.8.2</b> used for datasets, and data preprocessing.</li>
-  <li><b>tqdm==4.48.2</b> for better visualization of training process.</li>
+    <li><b>torch 1.7.1</b> the project is built in PyTorch.</li>
+    <li> <b>torchvision 0.8.2</b> used for datasets, and data preprocessing.</li>
+  <li><b>tqdm 4.48.2</b> for better visualization of training process.</li>
   <li><b>torchsummary</b> for invesitating the model's architecture.</li>
-   <li><b>numpy==1.19.4</b> used in preprocessing the dataset, adn showing examples.</li>
+   <li><b>numpy 1.19.4</b> used in preprocessing the dataset, adn showing examples.</li>
     <li><b>argparse</b> passsing the input variables for easy reproducibility.</li>
     <li><b>os</b> reading and writing the trained model's weights.</li>
  </ul>
@@ -57,10 +57,10 @@ Our experiments on various teacher-student pairs of models and datasets have dem
  <section>
  <h2 id="baselines">Baselines</h2>
   <ol>
-    <li><a href="https://arxiv.org/pdf/1503.02531.pdf">Canonical Knowledge Distillation <b>(KD)</b></a></li> As one of the benchmarks, we use conventional knowledge distillation (in the context and the experiments, we have refered to canonical knowledge distillation as <b>KD</b>). We used the same temperature (τ=5), and same alpha weight(α=0.1) as DIH.
-    <li><a href="https://arxiv.org/pdf/1412.6550.pdf"><b>FitNets</b></a></li> FitNets as a knowledge distillation framework, first transfers the knowledge of a fraction of a trained teacher model up to a selected layer (known as <b>hint layer</b>) to a fraction of a student model up to a selected intermediate layer (called <b>guided layer</b>). This step optimizes the selected fraction of the student by using the <b>L<sub>2</sub> loss objective</b>. The second step of FitNets, is the canonical knowledge distillation (KD) to transfer the knowledge from the complete teacher to the complete student. For the first step, we trained the selected fraction of the student for 40 epochs using L<sub>2</sub> loss function. In the second step, we used the same setting for KD and we trained the complete student model for 200 epochs.
-    <li><a href="https://arxiv.org/pdf/1902.03393.pdf">Knowledge Distillation with Teacher Assistants <b>(TAKD)</b></a></li> We limited the number of teacher assistants to 1 for each experiment. The setting for training the teacher assistant and the final student is identical (the same setting for KD).
-    <li><a href="https://arxiv.org/pdf/1706.00384.pdf">Deep Mutual Learning <b>(DML)</b></a></li> besides the previous benchmarks which are categorized as <b>offline KD</b> (i.e., the student is supervised by a fully trained teacher model), we also used deep mutual learning to evaluate our model with one of its online distillation counterparts (a scenario where there is no trained teacher, i.e., the teacher and the student co-teach each other). We set the same setting as KD, except we set the temperature (τ=1).
+    <li><a href="https://arxiv.org/pdf/1503.02531.pdf">Canonical Knowledge Distillation (KD)</a></li> As one of the benchmarks, we use conventional knowledge distillation (in the context and the experiments, we have refered to canonical knowledge distillation as KD). We used the same temperature (τ=5), and same alpha weight(α=0.1) as DIH.
+    <li><a href="https://arxiv.org/pdf/1412.6550.pdf">FitNets</a></li> FitNets as a knowledge distillation framework, first transfers the knowledge of a fraction of a trained teacher model up to a selected layer (known as <b>hint layer</b>) to a fraction of a student model up to a selected intermediate layer (called guided layer). This step optimizes the selected fraction of the student by using the L<sub>2</sub> loss objective. The second step of FitNets, is the canonical knowledge distillation (KD) to transfer the knowledge from the complete teacher to the complete student. For the first step, we trained the selected fraction of the student for 40 epochs using L<sub>2</sub> loss function. In the second step, we used the same setting for KD and we trained the complete student model for 200 epochs.
+    <li><a href="https://arxiv.org/pdf/1902.03393.pdf">Knowledge Distillation with Teacher Assistants (TAKD)</a></li> We limited the number of teacher assistants to 1 for each experiment. The setting for training the teacher assistant and the final student is identical (the same setting for KD).
+    <li><a href="https://arxiv.org/pdf/1706.00384.pdf">Deep Mutual Learning (DML)</a></li> Besides the previous benchmarks which are categorized as offline KD (i.e., the student is supervised by a fully trained teacher model), we also used deep mutual learning to evaluate our model with one of its online distillation counterparts (a scenario where there is no trained teacher, i.e., the teacher and the student co-teach each other). We set the same setting as KD, except we set the temperature (τ=1).
   </ol>
  </section>
  
