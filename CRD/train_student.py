@@ -1,5 +1,5 @@
 """
-the general training framework
+the general training framework  Reference : https://github.com/HobbitLong/RepDistiller
 """
 
 from __future__ import print_function
