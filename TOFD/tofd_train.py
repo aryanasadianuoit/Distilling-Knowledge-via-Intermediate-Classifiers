@@ -8,67 +8,19 @@ from benchmarks.tofd.tofd_resnets import resnet34
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 parser = argparse.ArgumentParser(description='Task-Oriented Feature Distillation. ')
-parser.add_argument('--model', default="res20", help="choose the student model", type=str)
+parser.add_argument('--model', default="res8", help="choose the student model", type=str)
 parser.add_argument('--dataset', default="cifar100", type=str, help="cifar10/cifar100")
 parser.add_argument('--alpha', default=0.05, type=float)
 parser.add_argument('--beta', default=0.03, type=float)
 parser.add_argument('--l2', default=7e-3, type=float)
 parser.add_argument('--teacher', default="vgg11", type=str)
 parser.add_argument('--t', default=3.0, type=float, help="temperature for logit distillation ")
-parser.add_argument('--seed', default=67, type=int, help="Seed value for reproducibility")
+parser.add_argument('--seed', default=3, type=int, help="Seed value for reproducibility")
 args = parser.parse_args()
 print(args)
 
 BATCH_SIZE = 128
 LR = 0.1
-"""
-transform_train = transforms.Compose([transforms.RandomCrop(32, padding=4, fill=128),
-                                      transforms.RandomHorizontalFlip(), transforms.ToTensor(),
-                                      transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
-transform_test = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-])
-
-trainset, testset = None, None
-if args.dataset == 'cifar100':
-    trainset = torchvision.datasets.CIFAR100(
-        root='data',
-        train=True,
-        download=True,
-        transform=transform_train
-    )
-    testset = torchvision.datasets.CIFAR100(
-        root='data',
-        train=False,
-        download=True,
-        transform=transform_test
-    )
-if args.dataset == 'cifar10':
-    trainset = torchvision.datasets.CIFAR10(
-        root='data',
-        train=True,
-        download=True,
-        transform=transform_train
-    )
-    testset = torchvision.datasets.CIFAR10(
-        root='data',
-        train=False,
-        download=True,
-        transform=transform_test
-    )
-trainloader = torch.utils.data.DataLoader(
-    trainset,
-    batch_size=BATCH_SIZE,
-    shuffle=True,
-    num_workers=4
-)
-testloader = torch.utils.data.DataLoader(
-    testset,
-    batch_size=BATCH_SIZE,
-    shuffle=False,
-    num_workers=4)
-"""
 
 if args.dataset == "cifar10":
 
@@ -132,13 +84,9 @@ elif args.teacher == 'resnet20':
     teacher = resnet20_cifar(seed=args.seed,num_classes=NUM_ClASSES)
 
 
-#teacher.load_state_dict(torch.load("./teacher/" + args.teacher + ".pth"))
-#teacher.load_state_dict(torch.load("/home/aasadian/virtualvenvs/gputestvenv/fitnes_from_scratch/codistillation/bests/ce/res110_cifar100.pth"))
-#saved_teacher_state_dict = ()
-#temp_dict = {}
-
-#teacher_path = "/home/aasadian/tofd/teacher/teacher_res110.pth"
-teacher_path = "/home/aasadian/tofd/teacher/teacher_vgg11_tofd_seed_50.pth"
+teacher.load_state_dict(torch.load("./teacher/" + args.teacher + ".pth"))
+saved_teacher_state_dict = ()
+temp_dict = {}
 
 full_modules_state_dict = {}
 saved_state_dict = torch.load(teacher_path)
@@ -147,7 +95,6 @@ for (key, value), (key_saved, value_saved) in zip(teacher.state_dict().items(), 
     testing_state_dict[key] = value_saved
     full_modules_state_dict["core." + key] = value_saved
 teacher.load_state_dict(testing_state_dict)
-#teacher_core.eval()
 
 
 teacher.cuda()
@@ -250,5 +197,5 @@ if __name__ == "__main__":
         if correct / total > best_acc:
             best_acc = correct / total
             print("Best Accuracy Updated: ", best_acc * 100)
-            torch.save(net.state_dict(), "/home/aasadian/tofd/" + args.model+"_teacher_"+ args.teacher + ".pth")
+            torch.save(net.state_dict(), "/home/tofd/" + args.model+"_teacher_"+ args.teacher + ".pth")
 print("Training Finished, Best Accuracy is %.4f%%" % (best_acc * 100))
