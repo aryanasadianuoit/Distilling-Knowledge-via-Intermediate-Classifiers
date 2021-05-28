@@ -13,7 +13,7 @@ parser.add_argument('--dataset', default="cifar100", type=str, help="cifar10/cif
 parser.add_argument('--alpha', default=0.05, type=float)
 parser.add_argument('--beta', default=0.03, type=float)
 parser.add_argument('--l2', default=7e-3, type=float)
-parser.add_argument('--teacher', default="vgg11", type=str)
+parser.add_argument('--teacher', default="res110", type=str)
 parser.add_argument('--t', default=3.0, type=float, help="temperature for logit distillation ")
 parser.add_argument('--seed', default=3, type=int, help="Seed value for reproducibility")
 args = parser.parse_args()
