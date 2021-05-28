@@ -248,6 +248,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     
   <code>python3 tofd_train.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
+    </div>
     <br>  
     
     <div id="mhkd">
@@ -255,6 +256,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     
   <code>python3 train_mhkd.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
+    </div>
     <br>  
     
      <div id="dih">
@@ -262,6 +264,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     
 <code>python3 final_test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0.0005 --seed 3 --path_to_save /home/dih_model.pth
 </code>
+    </div>
     
     
     
