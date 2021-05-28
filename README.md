@@ -53,7 +53,8 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <h2 id="datasets">Datasets</h2>
   <a href="https://www.cs.toronto.edu/~kriz/cifar.html"><b>CIFAR-10</b></a>, and <a href="https://www.cs.toronto.edu/~kriz/cifar.html"><b>CIFAR-100</b></a>  contain 32x32 pixel RGB images for 10 and 100 classes respectively. The datasets composed of 50,000 training and 10,000 testing images. All training and testing datasets are balanced (i.e., the number of images per class is the same within the dataset). For these two datasets, the images are augmented by the combination of horizontal flips, 4 pixels padding, and random crops. We also normalized the images by their mean and standard deviation. 
     
-     <a href="https://www.kaggle.com/c/tiny-imagenet"><b>CIFAR-10</b></a> contains 64x64 pixel RGB images for 200 classes, subsampled from ImageNet dataset. The datasets composed of 100,000 training and 10,000 testing images. All training and testing datasets are balanced (i.e., the number of images per class is the same within the dataset). We follwed data augmention techniques similar to CIFAR-10 and CIFAR-100, i.e., the images are augmented by the combination of horizontal flips, 4 pixels padding, and random 64-pixel crops. We also normalized the images by their mean and standard deviation. 
+     <a href="https://www.kaggle.com/c/tiny-imagenet"><b>Tiny-ImageNet</b></a> 
+   contains 64x64 pixel RGB images for 200 classes, subsampled from ImageNet dataset. The datasets composed of 100,000 training and 10,000 testing images. All training and testing datasets are balanced (i.e., the number of images per class is the same within the dataset). We follwed data augmention techniques similar to CIFAR-10 and CIFAR-100, i.e., the images are augmented by the combination of horizontal flips, 4 pixels padding, and random 64-pixel crops. We also normalized the images by their mean and standard deviation. 
  </section>
  
  <section>
