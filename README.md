@@ -91,6 +91,10 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <td align="center">4</td>
     </tr>
      <tr>
+    <td align="center">WR-28-2</td>
+    <td align="center">3</td>
+    </tr>
+     <tr>
     <td align="center">ResNet-110</td>
     <td align="center">3</td>
     </tr>
