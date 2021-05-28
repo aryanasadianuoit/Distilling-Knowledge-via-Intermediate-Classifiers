@@ -229,40 +229,42 @@ Our experiments on various teacher-student pairs of models and datasets have dem
      <code>python3 final_test.py --student res8 --training_type fitnets --teacher res110 --saved_path /home/teacher.pth  --path_to_save /home/stage_1.pth --epochs_fitnets_1 40  nesterov_fitnets_1 True --momentum_fitnets_1 0.9 --lr_fitnets_1 0.1 --wd_fitnets_1 0.0005 --batch_size 64  --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --seed 3</code>
       </div>
   <br>
-            <div id="kd">
-              The canonical <b>knowledge distillation (KD)</b> is available through the following command:  
+   <div id="kd">The canonical <b>knowledge distillation (KD)</b> is available through the following command:  
     <br>
      <code>python3 final_test.py --student res8 --training_type kd --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 64 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --seed 3 --temperature 5 </code>
       </div>
   <br> 
     <div id="crd">
-    
+    <br>   
  The student Resnet-8 can be trained via <b>CRD</b> through the following command:
-    
+    <br>
   <code>python3 train_student.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
     </div>
     <br>  
     
     <div id="tofd">
+    <br>
      The student Resnet-8 can be trained via <b>TOFD</b> through the following command:
-    
+    <br>
   <code>python3 tofd_train.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
     </div>
     <br>  
     
     <div id="mhkd">
+    <br>
  The student Resnet-8 can be trained via <b>MHKD</b> through the following command:
-    
+    <br>
   <code>python3 train_mhkd.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
     </div>
     <br>  
     
      <div id="dih">
+    <br>
     The student Resnet-8 can be trained via <b>DIH</b> through the following command:
-    
+    <br>
 <code>python3 final_test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0.0005 --seed 3 --path_to_save /home/dih_model.pth
 </code>
     </div>
