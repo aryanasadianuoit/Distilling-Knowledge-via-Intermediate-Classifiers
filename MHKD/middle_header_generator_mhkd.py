@@ -4,7 +4,7 @@ import torch.nn.functional as  F
 
 class Middle_Logit_Generator(nn.Module):
 
-    def __init__(self,middle_input,seed=3 ,num_classes = 10):
+    def __init__(self,middle_input,seed=3 ,num_classes = 100):
         reproducible_state(seed=seed)
         super(Middle_Logit_Generator, self).__init__()
         self.added_linear = nn.Linear(middle_input.size(1) * middle_input.size(2) * middle_input.size(3), num_classes)
@@ -37,27 +37,15 @@ class Middle_Logit_Generator_mhkd(nn.Module):
         x = self.conv_1(middle_input)
         x = self.bn_1(x)
         x = self.relu(x)
-
         x = self.conv_2(x)
         x = self.bn_2(x)
         x = self.relu(x)
-
-        #print("Before AVG Pooling  ===> ",x.shape)
-        #x = self.avg_pool(x)
-        x = F.adaptive_avg_pool2d(x, (1, 1))
-        #print("After AVG Pooling  ===> ",x.shape)
-
-
+        x = F.adaptive_avg_pool2d(x, (1, 1)
         x = x.view(x.size(0), -1)
-
         x = self.linear_1(x)
         x = self.relu(x)
         x = self.linear_2(x)
-
         return x
-
-
-
 
 
 class Guided_Conv1_Generator(nn.Module):
@@ -90,27 +78,3 @@ class Model_Wrapper(nn.Module):
         return out
 
 
-"""
-
-from models.VGG_models import VGG_Intermediate_Branches
-from torchsummary import summary
-import torch
-test = VGG_Intermediate_Branches("VGG11",num_classes=100)
-
-virtual_input = torch.rand((1,3,32,32))
-
-
-outputs = test(virtual_input)
-
-
-
-for output in outputs:
-    print(output.shape)
-
-print("*"*30,"\n")
-
-added_module_1 = Middle_Logit_Generator_mhkd(middle_input=outputs[1],num_classes=100,middle_dimension=256)
-
-summary(added_module_1,input_size=(128, 8 , 8),device="cpu")
-
-"""
