@@ -1,3 +1,8 @@
+
+
+#Reference : https://github.com/ArchipLab-LinfengZhang/Task-Oriented-Feature-Distillation
+
+
 from tofd_utils import *
 from resnet_cifar_tofd import *
 from models.OOG_resnet import ResNet34,ResNet18
