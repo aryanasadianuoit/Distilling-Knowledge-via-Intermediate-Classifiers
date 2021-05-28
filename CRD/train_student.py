@@ -30,13 +30,9 @@ from crd.criterion import CRDLoss
 
 from helper.loops import train_distill as train, validate
 from helper.pretrain import init
-seed = 67
+
 import numpy as np
-np.random.seed(seed)
-torch.manual_seed(seed)
-torch.cuda.manual_seed_all(seed=seed)
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = False
+
 
 
 def parse_option():
@@ -52,6 +48,7 @@ def parse_option():
     parser.add_argument('--num_workers', type=int, default=8, help='num of workers to use')
     parser.add_argument('--epochs', type=int, default=200, help='number of training epochs')
     parser.add_argument('--init_epochs', type=int, default=0, help='init training for two-stage methods')
+    parser.add_argument('--seed', type=int, default=3, help='print frequency')
 
     # optimization
     parser.add_argument('--learning_rate', type=float, default=0.1, help='learning rate')
@@ -97,6 +94,14 @@ def parse_option():
     parser.add_argument('--hint_layer', default=2, type=int, choices=[0, 1, 2, 3, 4])
 
     opt = parser.parse_args()
+    
+    
+    
+    np.random.seed(opt.seed)
+    torch.manual_seed(opt.seed)
+    torch.cuda.manual_seed_all(seed=opt.seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
     # set different learning rate from these 4 models
     if opt.model_s in ['MobileNetV2', 'ShuffleV1', 'ShuffleV2']:
