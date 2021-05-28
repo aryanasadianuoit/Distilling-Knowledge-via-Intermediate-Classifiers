@@ -38,7 +38,6 @@ torch.cuda.manual_seed_all(seed=seed)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
-print("TEACHER ===> Wres_28_2", seed,"  <== SEED")
 
 def parse_option():
 
@@ -65,13 +64,13 @@ def parse_option():
     parser.add_argument('--dataset', type=str, default='cifar100', choices=['cifar100'], help='dataset')
 
     # model
-    parser.add_argument('--model_s', type=str, default='resnet20',
+    parser.add_argument('--model_s', type=str, default='resnet8',
                         choices=['resnet8', 'resnet14', 'resnet20', 'resnet32', 'resnet44', 'resnet56', 'resnet110',
                                  'resnet8x4', 'resnet32x4', 'wrn_16_1', 'wrn_16_2', 'wrn_40_1', 'wrn_40_2',
                                  'vgg8', 'vgg11', 'vgg13', 'vgg16', 'vgg19', 'ResNet50',
                                  'MobileNetV2', 'ShuffleV1', 'ShuffleV2'])
     parser.add_argument('--path_t', type=str,
-        default="/home/aasadian/contrastive2/saved_teacher/wrn_28_2_cifar100_lr_0.1_decay_0.0005_trial_0/wrn_28_2_best.pth"
+        default="/home/contrastive/saved_teacher/res_110_best.pth"
                         , help='teacher model snapshot')
 
     # distillation
@@ -108,8 +107,8 @@ def parse_option():
         opt.model_path = '/path/to/my/student_model'
         opt.tb_path = '/path/to/my/student_tensorboards'
     else:
-        opt.model_path = '/home/aasadian/contrastive2/saved_students'
-        opt.tb_path = '/home/aasadian/contrastive2/saved_students/student_tensorboards'
+        opt.model_path = '/home/saved_students'
+        opt.tb_path = '/home/saved_students/student_tensorboards'
 
     iterations = opt.lr_decay_epochs.split(',')
     opt.lr_decay_epochs = list([])
@@ -147,14 +146,8 @@ def get_teacher_name(model_path):
 def load_teacher(model_path, n_cls):
     print('==> loading teacher model')
     print("Model Path",model_path)
-    #model_t = get_teacher_name(model_path)
-    model_t = "wres-28-2"
-    #model = model_dict[model_t](num_classes=n_cls)
-    print("model_t ",model_t)
-    #model = model_dict[model_t]
-    from models.resnet import resnet110
-    from  models.wrn import wrn_28_2
-    model = wrn_28_2(num_classes=100)
+    model_t = get_teacher_name(model_path)
+    model = model_dict[model_t](num_classes=n_cls)
     model.load_state_dict(torch.load(model_path)['model'])
     print('==> done')
     return model
