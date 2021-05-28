@@ -241,6 +241,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     
   <code>python3 train_student.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
+    </div>
     <br>  
     
     <div id="tofd">
