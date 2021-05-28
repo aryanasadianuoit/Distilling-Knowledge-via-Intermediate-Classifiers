@@ -229,12 +229,6 @@ Our experiments on various teacher-student pairs of models and datasets have dem
      <code>python3 final_test.py --student res8 --training_type fitnets --teacher res110 --saved_path /home/teacher.pth  --path_to_save /home/stage_1.pth --epochs_fitnets_1 40  nesterov_fitnets_1 True --momentum_fitnets_1 0.9 --lr_fitnets_1 0.1 --wd_fitnets_1 0.0005 --batch_size 64  --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --seed 3</code>
       </div>
   <br>
-         <div id="dml">
-       As another baseline, one can train a cohort of two models (student and the teacher) as a cohort via <b>deep mutual learning (DML)</b>, by the following template:
-    <br>
-     <code>python3 final_test.py --student res8 --training_type dml --teacher res110 --path_to_save /home/dml --batch_size 64 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,160] --wd 0.0005 --alpha 0.1 --temperature 1 --seed 3</code>
-      </div>
-  <br>
             <div id="kd">
               The canonical <b>knowledge distillation (KD)</b> is available through the following command:  
     <br>
@@ -244,22 +238,28 @@ Our experiments on various teacher-student pairs of models and datasets have dem
     <div id="crd">
     
  The student Resnet-8 can be trained via <b>CRD</b> through the following command:
-  <code>python3 train_student.py --path_t ./save/models/resnet32x4_vanilla/ckpt_epoch_240.pth --distill crd --model_s resnet8 
+    
   <code>python3 train_student.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
     <br>  
+    
     <div id="tofd">
      The student Resnet-8 can be trained via <b>TOFD</b> through the following command:
+    
   <code>python3 tofd_train.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
     <br>  
-    <div id="mhks">
+    
+    <div id="mhkd">
  The student Resnet-8 can be trained via <b>MHKD</b> through the following command:
-  <code>python3 tofd_mhkd.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
+    
+  <code>python3 train_mhkd.py --student res8 --teacher res110 --saved_path /home/teacher.pth --path_to_save /home/res8_kd.pth --batch_size 128 --dataset cifar100 --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60,120,180] --wd 0.0005 --alpha 0.1 --beta 0.03 --temperature 5
 </code>
     <br>  
-
+    
+     <div id="dih">
     The student Resnet-8 can be trained via <b>DIH</b> through the following command:
+    
 <code>python3 final_test.py --student res8 --teacher res110 --saved_path /home/teacher.pth --saved_intermediates_directory /home/saved_headers/ --alpha 0.1  --temperature 5 --batch_size 64  --dataset cifar100  --epochs 200 --gpu_id cuda:0  --lr 0.1 --schedule [60, 120, 180] --wd 0.0005 --seed 3 --path_to_save /home/dih_model.pth
 </code>
     
