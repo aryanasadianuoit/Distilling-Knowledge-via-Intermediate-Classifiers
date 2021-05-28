@@ -17,7 +17,6 @@ criterion = nn.CrossEntropyLoss()
 
 
 def train_mhkd_grid(student,
-                    #experiment_name_tb,
                    trained_core_teacher,
                    teacher_headers_dict,
                    student_headers_dict,
@@ -56,24 +55,14 @@ def train_mhkd_grid(student,
     :return:
     """
 
-    #comment = f'Experiment Name : {experiment_name_tb}'
-    # postfix_name = f'gamma_p_1_{gamma_peer_1}_temp_p_1_{temperature_peer_1}_gamma_p_2_{gamma_peer_2}_temp_p_2_{temperature_peer_2}'
-    #postfix_name = f'{experiment_name_tb}_tb'
-    #tb = SummaryWriter(comment=comment,
-                       #log_dir="/home/aasadian/tensorboards/" + postfix_name)
-    # log_dir="/home/aasadian/tensorboards/"+experiment_name+"/" + postfix_name)
-    # log_dir="/home/aasadian/saved/grid_dml_search/" + postfix_name)
-    #print("Tensorboard has been SET!")
 
 
-    #print("Dataset ===>",dataset)
     device = torch.device(train_on)
     student.to(device)
     trained_core_teacher.to(device)
     trained_core_teacher.eval()
     for (branch_key, branch_classifer) in teacher_headers_dict.items():
         branch_classifer.to(device)
-        #branch_classifer.eval()
 
     for (student_head_key, student_head_value) in student_headers_dict.items():
         student_head_value.to(device)
@@ -126,20 +115,7 @@ def train_mhkd_grid(student,
     #for epoch in tqdm(range(epochs)):
     for epoch in range(epochs):
 
-
-        #dynamic gamma via cosine annealing
-        if cosine_annealing_gamma:
-            pi_tensor = torch.tensor([math.pi],device=device)
-            final_alpha = 0.5 * (1 + torch.cos(epoch / epochs * pi_tensor) * (kd_alpha - 1.0 )) #+ kd_gamma
-            print("FINAL GAMMA VIA COSINE ANNEALING ==> ",final_alpha)
-
-        else:
-            final_alpha = kd_alpha
-            #if isinstance(kd_gamma,dict):
-                #print("Yes It is Dict")
-            #print(final_gamma)
-
-
+        final_alpha = kd_alpha
 
         # Each epoch has a training and validation phase
         for phase in ['train', 'val']:
@@ -186,28 +162,12 @@ def train_mhkd_grid(student,
                         _, preds = torch.max(student_outputs, 1)
 
 
-                    #tb.add_histogram("Logits", out_s, global_step=epoch)
-
-                    #if dataset == "cifar10":
-                        #top_k = torch.topk(out_s, 10)
-                    #elif dataset == "cifar100":
-                        #top_k = torch.topk(out_s, 100)
-
-
-                    #tb.add_histogram('Preds', preds, epoch)
-                    #tb.add_histogram("Top Class Probs values", top_k[0], global_step=epoch)
-                    #tb.add_histogram("Top Class Probs index", top_k[1], global_step=epoch)
-
-
-
 
                     for (student_head_key,student_head_value) in student_headers_dict.items():
                         #for Non VGG Models
                         if not isinstance(student_outputs,list):
-                            #complete_student_outputs_dict[student_head_key] = student_head_value(student_outputs[student_head_key])
                             complete_student_outputs_dict[student_head_key] =  student_head_value(student_outputs[student_head_key])
                         else:
-                            #complete_student_outputs_dict[student_head_key] = student_head_value(student_outputs[1][student_head_key-1])
                             complete_student_outputs_dict[student_head_key] = student_head_value(student_outputs[1][student_head_key-1])
 
 
@@ -223,27 +183,12 @@ def train_mhkd_grid(student,
                     for (teacher_head_key,teacher_head_value) in paralleled_teacher_headers_dict.items():
 
                         if isinstance(teacher_outputs,list):
-                            #print("KEY IS ",teacher_head_key,teacher_outputs[teacher_head_key-1].shape)
 
                             out_d_dict[teacher_head_key] = teacher_head_value(teacher_outputs[teacher_head_key-1])
                             complete_teacher_outputs_dict[teacher_head_key] = teacher_head_value(
                                 teacher_outputs[teacher_head_key-1])
 
-                        #for Non VGG Models
-                        #if not isinstance(teacher_outputs[1],list):
-                         #   #out_d_dict[teacher_head_key] = teacher_head_value(teacher_outputs[teacher_head_key+1])
-                         #   out_d_dict[teacher_head_key] = teacher_head_value(teacher_outputs[teacher_head_key])
-                         #   complete_teacher_outputs_dict[teacher_head_key] =  teacher_head_value(teacher_outputs[teacher_head_key])
-                       # else:
-                        #    out_d_dict[teacher_head_key] = teacher_head_value(teacher_outputs[1][teacher_head_key-1])
-                         #   complete_teacher_outputs_dict[teacher_head_key] = teacher_head_value(teacher_outputs[1][teacher_head_key-1])
-
-
-
-
-
-
-
+                 
                     loss = 0.0
                     if isinstance(final_alpha,dict):
                         for (teacher_head_id,_),(student_head_id,_) in zip(complete_teacher_outputs_dict.items(),complete_student_outputs_dict.items()):
@@ -269,7 +214,6 @@ def train_mhkd_grid(student,
                                                target=labels,
                                                gamma=final_alpha[student_head_id+1],
                                                temperature=kd_temperature)
-                            #print(phase," Loss of ",branch_id," ===>   ",float(temp.data))
                                 loss += temp
 
                     else:
@@ -306,26 +250,17 @@ def train_mhkd_grid(student,
                 if epoch == 0:
                     previous_saved_loss = epoch_loss
 
-            #print('{} Loss: {:.4f} Acc: {:.4f}'.format(
-               # phase, epoch_loss, epoch_acc))
-
+  
             # deep copy the model
             if phase == 'val' and epoch_loss <= previous_saved_loss:
                 previous_saved_loss = epoch_loss
                 #print("Improvement in Val loss, saved!")
                 torch.save(student.state_dict(), path_to_save)
                 best_model_wts = copy.deepcopy(student.state_dict())
-            #elif phase == "val" and epoch_loss > previous_saved_loss:
-                #print("Previous saved loss is smaller! NOT saving.")
 
-            #tb.add_scalar(phase + "_Total_Loss_", epoch_loss, epoch)
-            #tb.add_scalar(phase + "_Accuracy_", epoch_acc, epoch)
 
 
     time_elapsed = time.time() - since
-    #print('Training complete in {:.0f}m {:.0f}s'.format(
-        #time_elapsed // 60, time_elapsed % 60))
-
 
     # load best model weights
     student.load_state_dict(best_model_wts)
@@ -335,8 +270,4 @@ def train_mhkd_grid(student,
                          state_dict=best_model_wts)
 
     return test_acc,time_elapsed
-
-    #tb.add_scalar("Test Accuracy", test_acc)
-    #tb.close()
-    #torch.save(student_partially_trained_from_stage_1.state_dict(), path_to_save)
 
