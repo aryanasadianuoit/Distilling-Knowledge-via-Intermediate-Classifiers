@@ -1,10 +1,10 @@
-# Distilling Knowledge via Intermediate Classifier Heads (DIH)
+# Distilling Knowledge via Intermediate Classifiers
 <section>
   <h2>Table of Contents:</h2>
   <ul>
     <li><a href="#introduction"><b>Introduction</b></a></li>
       <ul>
-        <li> <a href="#dih_pipeline"><b>DIH training pipeline</b></a></li>
+        <li> <a href="#dih_pipeline"><b>The framework pipeline</b></a></li>
       </ul>
     </li>
   <li><a href="#datasets"><b>Datasets</b></a></li>
@@ -20,7 +20,7 @@
   </ul>
   <h2 id="introduction">Introduction</h2>
 <p text-align: justify>
-  <b>Distilling Knowledge via Intermediate Classifier Heads (DIH)</b> is a knowledge distillation framework that specifically tries to mitigate the negative impact of <i>the capacity gap</i>, i.e., the difference in model complexity between the teacher and the student model on knowledge distillation. This approach improves the canonical knowledge distillation (KD) with the help of the teacher's <i>intermediate representations</i> (the outputs of some of the hidden layers).
+  <b>Distilling Knowledge via Intermediate Classifiers (DIH)</b> is a knowledge distillation framework that specifically tries to mitigate the negative impact of <i>the capacity gap</i>, i.e., the difference in model complexity between the teacher and the student model on knowledge distillation. This approach improves the canonical knowledge distillation (KD) with the help of the teacher's <i>intermediate representations</i> (the outputs of some of the hidden layers).
   <br>
   <h3 id="dih_pipeline">DIH training pipeline</h3>
   <ol>
@@ -33,7 +33,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
   <br>
   <section>
   <br>
-    <div align="center"><img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifier Heads (DIH)" width="600" height="500" align="center"></div>
+    <div align="center"><img src="DIH.png" alt="Distilling Knowledge via Intermediate Classifiers (DIH)" width="600" height="500" align="center"></div>
   </section>
   <section>
   <h2>Requirements</h2>
