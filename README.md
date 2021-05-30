@@ -12,7 +12,7 @@
   <li><a href="#run"><b>Running The Experiments</b></a></li>
       <ul>
         <li><a href="#files"><b>Files in this repository</b></a></li>
-        <li><a href="#hypers_section"><b>Hyper-parameters to set</b></a></li>
+        <li><a href="#hypers_section"><b>Hyperparameters to set</b></a></li>
       </ul>
   <li><a href="#examples"><b>Example</b></a></li>
   <li><a href="#refs"><b>Reference</b></a></li>
