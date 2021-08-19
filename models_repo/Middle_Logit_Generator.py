@@ -11,9 +11,6 @@ class Middle_Logit_Generator(nn.Module):
         added_linear_output = self.added_linear(fllaten_added)
         return added_linear_output
 
-
-
-
 class Guided_Conv1_Generator(nn.Module):
 
     def __init__(self,middle_input,num_classes = 10):
@@ -23,8 +20,6 @@ class Guided_Conv1_Generator(nn.Module):
     def forward(self, middle_input):
         added_linear_output = self.added_linear(middle_input)
         return added_linear_output
-
-
 
 class Model_Wrapper(nn.Module):
 
@@ -41,4 +36,3 @@ class Model_Wrapper(nn.Module):
         else:
             out = self.attached_part(out[self.core_output_index[0]][self.core_output_index[1]-1])
         return out
-
