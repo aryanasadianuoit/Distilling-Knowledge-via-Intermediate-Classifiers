@@ -3,13 +3,13 @@ from models_repo.massive_resnets import *
 from models_repo.tiny_resnets import *
 from models_repo.Middle_Logit_Generator import *
 import argparse
-from dih_github.train_funcs import train_regular_ce,\
+from train_funcs import train_regular_ce,\
     train_regular_middle_logits,\
     train_kd_or_fitnets_2,\
     stage_1_fitnet_train,\
     dml_train_regular
 from train_dih import train_via_dih
-#from dih_github.dih_utils import load_trained_intermediate_heads
+from dih_utils import load_trained_intermediate_heads
 
 
 
@@ -20,11 +20,11 @@ parser.add_argument('--training_type', default='dih', type=str,
                          ' "kd" (canonical knowledge distillation) "fine_tune" (fine_tuning the intermediate heads) "fitnets", "dml" (deep mutual learning) or dih. default =  "dih"')
 parser.add_argument('--epochs', default=200, type=int, help='Input the number of epochs: default(200)')
 parser.add_argument('--momentum', default=0.9, type=float, help='Input the momentum: default(0.9)')
-parser.add_argument('--nesterov', default=True, type=float, help='Input the status of nesterov: default(True)')
+parser.add_argument('--nesterov', default=True, type=bool, help='Input the status of nesterov: default(True)')
 parser.add_argument('--batch_size', default=64, type=int, help='Input the batch size: default(128)')
 parser.add_argument('--lr', default=0.1, type=float, help='Input the learning rate: default(0.1)')
 parser.add_argument('--wd', default=5e-4, type=float, help='Input the weight decay rate: default(5e-4)')
-parser.add_argument('--schedule', type=list, nargs='+', default=[60, 120, 180],
+parser.add_argument('--schedule', nargs='+', default=[60, 120, 180],
                     help='Decrease learning rate at these epochs.')
 parser.add_argument('--schedule_gamma', type=float, default=0.2,
                     help='multiply the learning rate to this factor at pre-defined epochs in schedule (default : 0.2)')
@@ -50,11 +50,11 @@ parser.add_argument('--seed', default=3, type=int, help='seed value for reproduc
 
 #FitNets stage 1
 
-parser.add_argument('--student_satge_1_saved', default='/model.pth', type=str,
+parser.add_argument('--student_stage_1_saved', default='/model.pth', type=str,
                     help='the path of the saved partial student upto the guided layer (stage 1 of FitNets)')
 parser.add_argument('--epochs_fitnets_1', default=40, type=int, help='Input the number of epochs: default(40) FitNets stage 1')
 parser.add_argument('--momentum_fitnets_1', default=0.9, type=float, help='Input the momentum: default(0.9) FitNets stage 1')
-parser.add_argument('--nesterov_fitnets_1', default=True, type=float, help='Input the status of nesterov: default(True) FitNets stage 1')
+parser.add_argument('--nesterov_fitnets_1', default=True, type=bool, help='Input the status of nesterov: default(True) FitNets stage 1')
 parser.add_argument('--lr_fitnets_1', default=0.1, type=float, help='Input the learning rate: default(0.1) FitNets stage 1')
 parser.add_argument('--wd_fitnets_1', default=5e-4, type=float, help='Input the weight decay rate: default(5e-4) FitNets stage 1')
 parser.add_argument('--schedule_fitnets_1', type=list, nargs='+', default=[60, 120, 180],
@@ -68,10 +68,8 @@ state = {k: v for k, v in args._get_kwargs()}
 
 for (arg,value) in state.items():
     print(arg+" : "+str(value)+"\n"+"*"*30)
-#print(args)
 
-
-#Models for this experiment
+# Models for this experiment
 models_dict = {"res8": resnet8_cifar,
                "res14": resnet14_cifar,
                "res20": resnet20_cifar,
@@ -80,7 +78,7 @@ models_dict = {"res8": resnet8_cifar,
                "res18": ResNet18}
 
 
-#The number of mounted intermediate heads based on the model architecture in this paper.
+# The number of mounted intermediate heads based on the model architecture in this paper.
 intermediate_heads_quantity = {"res8": 3,
                "res14": 3,
                "res20": 3,
@@ -202,8 +200,8 @@ if args.teacher != None:
                 for (key,_),(key_saved,value_saved) in zip(teacher.state_dict().items(),teacher_saved_state_dict.items()):
                     if "module."+ key == key_saved:
                         temp_dict[key] = value_saved
-                    teacher.load_state_dict(temp_dict)
-                    teacher.eval()
+                        teacher.load_state_dict(temp_dict)
+                        teacher.eval()
 
             optimizer = torch.optim.SGD(student.parameters(),
                                         lr=args.lr,
@@ -242,8 +240,8 @@ if args.teacher != None:
                                                               teacher_saved_state_dict.items()):
                     if "module." + key == key_saved:
                         temp_dict[key] = value_saved
-                    teacher.load_state_dict(temp_dict)
-                    teacher.eval()
+                        teacher.load_state_dict(temp_dict)
+                        teacher.eval()
 
             optimizer = torch.optim.SGD(student.parameters(),
                                         lr=args.lr_fitnets_1,
