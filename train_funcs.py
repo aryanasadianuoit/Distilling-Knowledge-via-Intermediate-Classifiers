@@ -1,15 +1,12 @@
 from tqdm import tqdm
 import time
 import copy
-from dih_github.dataload import get_cifar,get_test_loader_cifar
-from dih_github.KD_Loss import kd_loss
-from general_utils import experiment_result_saver
-from general_utils import test_data_evaluation
-from general_utils import checkpoint_saver
+from dataload import get_cifar,get_test_loader_cifar
+from KD_Loss import kd_loss
 import numpy as np
+import torch
 from torch import nn
-from dih_github.DML_Loss import dml_loss_function
-
+from DML_Loss import dml_loss_function
 
 criterion = nn.CrossEntropyLoss()
 def train_regular_ce(model,
@@ -496,15 +493,9 @@ def train_kd_or_fitnets_2(student,
 
 
 
-
-
-
-
 from tqdm import tqdm
 import time
 import copy
-from dataloader import *
-
 
 hint_loss_criterion = torch.nn.MSELoss()
 
