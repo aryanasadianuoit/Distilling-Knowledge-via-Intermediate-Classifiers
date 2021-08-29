@@ -210,7 +210,7 @@ Our experiments on various teacher-student pairs of models and datasets have dem
      <tr>
     <td align="center">seed</td>
     <td align="center">seed</td>
-    <td align="center">[21,30,67]</td>
+    <td align="center">[30,50,67]</td>
   </tr>
 </table>
 <br> 
