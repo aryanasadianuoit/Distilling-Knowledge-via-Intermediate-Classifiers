@@ -23,8 +23,7 @@ def get_cifar(batch_size,
     if augment:
         train_transform = transforms.Compose([
             transforms.Resize((output_width, output_height)),
-            transforms.RandomCrop(32, padding=4),
-            #transforms.RandomCrop(32, padding=4,padding_mode='reflect'),
+            transforms.RandomCrop(32, padding=4,padding_mode='reflect'),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             normalize,
@@ -34,17 +33,17 @@ def get_cifar(batch_size,
         valid_transform = transforms.Compose([
             transforms.Resize((output_width, output_height)),
             transforms.ToTensor(),
-            normalize,
+            normalize
         ])
     else:
         train_transform = transforms.Compose([
             transforms.ToTensor(),
-            normalize,
+            normalize
         ])
         # define transforms
         valid_transform = transforms.Compose([
             transforms.ToTensor(),
-            normalize,
+            normalize
         ])
 
     # load the dataset
@@ -68,8 +67,6 @@ def get_cifar(batch_size,
             download=True,
             transform=valid_transform)
 
-
-
     num_train = len(train_dataset)
     indices = list(range(num_train))
     train_sampler = SubsetRandomSampler(indices)
@@ -77,16 +74,12 @@ def get_cifar(batch_size,
     if shuffle:
         np.random.shuffle(indices)
 
-
-
     train_loader = torch.utils.data.DataLoader(
         train_dataset, batch_size=batch_size, sampler=train_sampler,
         num_workers=num_workers, pin_memory=pin_memory,
     )
 
-
     if cifar10_100 == "cifar100":
-
             valid_loader = get_test_loader_cifar(batch_size=batch_size,
                                              dataset="cifar100",
                                              output_width=output_width,
@@ -96,9 +89,6 @@ def get_cifar(batch_size,
                                                  dataset="cifar10",
                                                  output_width=output_width,
                                                  output_height=output_height)
-
-
-
     data_loader_dict = {
         "train": train_loader,
         "val": valid_loader
@@ -137,10 +127,10 @@ def get_test_loader_cifar(
     - data_loader: test set iterator.
     """
     if dataset =="cifar10":
-        normalize = transforms.Normalize(mean=[0.507, 0.487, 0.441], std=[0.267, 0.256, 0.276])
+        normalize = transforms.Normalize((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261))
         # define transform
         transform = transforms.Compose([
-            transforms.Resize((output_width, output_height)),
+            # transforms.Resize((output_width, output_height)),
             transforms.ToTensor(),
             normalize,
         ])
@@ -158,14 +148,13 @@ def get_test_loader_cifar(
 
         # define transform
         transform = transforms.Compose([
-            transforms.Resize((output_width, output_height)),
             transforms.ToTensor(),
-            normalize,
+            normalize
         ])
 
         dataset = datasets.CIFAR100(
             root=data_dir, train=False,
-            download=True, transform=transform,
+            download=True, transform=transform
         )
 
     data_loader = torch.utils.data.DataLoader(
@@ -174,6 +163,3 @@ def get_test_loader_cifar(
     )
 
     return data_loader
-
-
-
