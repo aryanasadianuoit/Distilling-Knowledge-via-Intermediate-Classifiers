@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 from models_repo.massive_resnets import *
 from models_repo.tiny_resnets import *
 from models_repo.Middle_Logit_Generator import *
@@ -18,29 +19,26 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--training_type', default='dih', type=str,
                     help='The mode for training, could be either "ce" (regular cross-entropy)'
                          ' "kd" (canonical knowledge distillation) "fine_tune" (fine_tuning the intermediate heads) "fitnets", "dml" (deep mutual learning) or dih. default =  "dih"')
-parser.add_argument('--epochs', default=200, type=int, help='Input the number of epochs: default(200)')
+parser.add_argument('--epochs', default=240, type=int, help='Input the number of epochs: default(240)')
 parser.add_argument('--momentum', default=0.9, type=float, help='Input the momentum: default(0.9)')
-parser.add_argument('--nesterov', default=True, type=bool, help='Input the status of nesterov: default(True)')
-parser.add_argument('--batch_size', default=64, type=int, help='Input the batch size: default(128)')
-parser.add_argument('--lr', default=0.1, type=float, help='Input the learning rate: default(0.1)')
+parser.add_argument('--nesterov', default=True)
+parser.add_argument('--no-nesterov', action='store_false', dest='nesterov', help='Disable Nesterov: default(True)')
+parser.add_argument('--batch_size', default=128, type=int, help='Input the batch size: default(128)')
+parser.add_argument('--lr', default=0.05, type=float, help='Input the learning rate: default(0.05)')
 parser.add_argument('--wd', default=5e-4, type=float, help='Input the weight decay rate: default(5e-4)')
-parser.add_argument('--schedule', nargs='+', default=[60, 120, 180],
+parser.add_argument('--schedule', nargs='+', type=int, default=[150, 180, 210],
                     help='Decrease learning rate at these epochs.')
 parser.add_argument('--schedule_gamma', type=float, default=0.2,
                     help='multiply the learning rate to this factor at pre-defined epochs in schedule (default : 0.2)')
 parser.add_argument('--dataset', default='CIFAR100', type=str, help='Input the name of dataset: default(CIFAR100)')
-
-
 parser.add_argument('--student', default='res8', type=str, help='The student model. default: ResNet 8')
 parser.add_argument('--teacher', default=None, type=str, help='The teacher model. default: ResNet 110')
-
 parser.add_argument('--path_to_save', default='./model.pth', type=str,
                     help='the path to save the model and/or headers after training')
 parser.add_argument('--saved_path', default='/model.pth', type=str,
                     help='the path of the saved model')
 parser.add_argument('--saved_intermediates_directory', default='./saved_headers/', type=str,
                     help='the directory of fined-tuned mounted intermediate heads')
-
 
 parser.add_argument('--gpu_id', default='cuda:0', type=str, help='id(s) for CUDA_VISIBLE_DEVICES')
 parser.add_argument('--kd_alpha', default=0.1, type=float, help='alpha weigth in knowedge distiilation loss function')
@@ -57,15 +55,18 @@ parser.add_argument('--momentum_fitnets_1', default=0.9, type=float, help='Input
 parser.add_argument('--nesterov_fitnets_1', default=True, type=bool, help='Input the status of nesterov: default(True) FitNets stage 1')
 parser.add_argument('--lr_fitnets_1', default=0.1, type=float, help='Input the learning rate: default(0.1) FitNets stage 1')
 parser.add_argument('--wd_fitnets_1', default=5e-4, type=float, help='Input the weight decay rate: default(5e-4) FitNets stage 1')
-parser.add_argument('--schedule_fitnets_1', type=list, nargs='+', default=[60, 120, 180],
+parser.add_argument('--schedule_fitnets_1', type=int, nargs='+', default=[60, 120, 180],
                     help='Decrease learning rate at these epochs. FitNets stage 1')
 parser.add_argument('--schedule_gamma_fitnets_1', type=float, default=0.2,
                     help='multiply the learning rate to this factor at pre-defined epochs in schedule (default : 0.2) FitNets stage 1')
 
 
+# Create a dictionary (key,value) pair with the arguments
+# state = {'batch_size': 64, 'dataset': 'cifar100', 'epochs': 200, 'epochs_fitnets_1': 40, 'gpu_id': 'cuda:0', 'kd_alpha': 0.1, 'kd_temperature': 5, 'lr': 0.1, 'lr_fitnets_1': 0.1, 'momentum': 0.9, 'momentum_fitnets_1': 0.9, 'nesterov': True, 'nesterov_fitnets_1': True, 'path_to_save': './teacher_res8_cifar100_seed_3_epochs_200.th', 'saved_intermediates_directory': './saved_headers/', 'saved_path': '/model.pth', 'schedule': [60, 120, 180], 'schedule_fitnets_1': [60, 120, 180], 'schedule_gamma': 0.2, 'schedule_gamma_fitnets_1': 0.2, 'seed': 3, 'student': 'res8', 'student_stage_1_saved': '/model.pth', 'teacher': 'res8', 'training_type': 'ce', 'wd': 0.0005, 'wd_fitnets_1': 0.0005}
 args = parser.parse_args()
 state = {k: v for k, v in args._get_kwargs()}
 
+# Print the arguments
 for (arg,value) in state.items():
     print(arg+" : "+str(value)+"\n"+"*"*30)
 
@@ -86,29 +87,49 @@ intermediate_heads_quantity = {"res8": 3,
                "res34": 4,
                "res18": 4}
 
+# Output classes
 if args.dataset == "cifar10":
     num_classes = 10
 else:
     num_classes = 100
 
+np.random.seed(args.seed)
+torch.manual_seed(args.seed)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+
+# Regular Cross-entrophy (no distillation)
+# args.teacher = teacher architecture (res8, res110...)
 if args.teacher != None:
+    # teacher = resnet8_cifar (PyTorch nn.module)
     teacher = models_dict[args.teacher](num_classes=num_classes)
-    if args.training_type == "ce":  #regular cross_entropy for the teacher
+
+    # regular cross_entropy for the teacher
+    if args.training_type == "ce":
+# state = {'batch_size': 64, 'dataset': 'cifar100', 'epochs': 200, 'epochs_fitnets_1': 40, 'gpu_id': 'cuda:0', 'kd_alpha': 0.1, 'kd_temperature': 5, 'lr': 0.1, 'lr_fitnets_1': 0.1, 'momentum': 0.9, 'momentum_fitnets_1': 0.9, 'nesterov': True, 'nesterov_fitnets_1': True, 'path_to_save': './teacher_res8_cifar100_seed_3_epochs_200.th', 'saved_intermediates_directory': './saved_headers/', 'saved_path': '/model.pth', 'schedule': [60, 120, 180], 'schedule_fitnets_1': [60, 120, 180], 'schedule_gamma': 0.2, 'schedule_gamma_fitnets_1': 0.2, 'seed': 3, 'student': 'res8', 'student_stage_1_saved': '/model.pth', 'teacher': 'res8', 'training_type': 'ce', 'wd': 0.0005, 'wd_fitnets_1': 0.0005}
         optimizer = torch.optim.SGD(teacher.parameters(),
-                                    lr=args.lr,
-                                    weight_decay=args.wd,
-                                    momentum=args.momentum,
-                                    nesterov=args.nesterov)
+                                    lr=args.lr,             # 'lr': 0.1
+                                    weight_decay=args.wd,   # 'wd': 0.0005
+                                    momentum=args.momentum, # 'momentum': 0.9
+                                    nesterov=args.nesterov) # 'nesterov': True
+
         scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer,
-                                                         milestones=args.schedule,
-                                                         gamma=args.schedule_gamma,
+                                                         milestones=[60, 120, 180], # args.schedule,  # 'schedule': [60, 120, 180]
+                                                         gamma=args.schedule_gamma, # 'schedule_gamma': 0.2
                                                          last_epoch=-1)
 
+        # return is used for nothing
+        # train_funcs::train_regular_ce
         trained_model = train_regular_ce(model=teacher,
                                          optimizer=optimizer,
                                          epochs=args.epochs,
+                                         dataset=args.dataset,
+                                         train_on=args.gpu_id,
+                                         batch_size=args.batch_size,
                                          scheduler=scheduler,
+                                         seed=args.seed,
                                          path_to_save=args.path_to_save)
+
     elif args.training_type == "fine_tune":  #Fine_Tuning the mounted intermedeiate headers
 
         saved_state_dict = torch.load(args.saved_path)

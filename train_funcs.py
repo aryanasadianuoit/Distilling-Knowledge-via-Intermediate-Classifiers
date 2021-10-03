@@ -2,13 +2,16 @@ from tqdm import tqdm
 import time
 import copy
 from dataload import get_cifar,get_test_loader_cifar
+from general_utils import test_data_evaluation
 from KD_Loss import kd_loss
 import numpy as np
 import torch
 from torch import nn
 from DML_Loss import dml_loss_function
+import pdb
 
 criterion = nn.CrossEntropyLoss()
+
 def train_regular_ce(model,
                   optimizer,
                   path_to_save,
@@ -17,20 +20,27 @@ def train_regular_ce(model,
                   train_on="cuda:0",
                   multiple_gpu=None,
                   scheduler= None,
+                  seed=3,
                   batch_size = 64):
 
     device = torch.device(train_on)
     if ("cuda" in train_on) and (multiple_gpu is not None):
         model = nn.DataParallel(model,device_ids=multiple_gpu)
+
+    # benchmark time
     since = time.time()
+
+    # to gpu
     model.to(device)
 
+    # dataload.py
+    data_loader_dict,dataset_sizes = get_cifar(batch_size=batch_size,   # 64
+                                                   cifar10_100=dataset) # cifar10/cifar100
+    # {'train': 50000, 'val': 10000}
 
-    data_loader_dict,dataset_sizes = get_cifar(batch_size=batch_size,
-                                                   cifar10_100=dataset)
-
-
+    # copy the state to best_model_wts
     best_model_wts = copy.deepcopy(model.state_dict())
+
     previous_loss = 0.0
     best_val_acc = 0.0
     best_train_acc = 0.0
@@ -40,12 +50,12 @@ def train_regular_ce(model,
     val_acc_dict = {}
     val_loss_dict = {}
 
+    # tqdm is for progress bar
     for epoch in tqdm(range(epochs)):
         print('Epoch {}/{}'.format(epoch+1, epochs ))
         print('-' * 10)
 
-
-        for phase in ["train","val"]: #phase_list:#['train', 'val']:
+        for phase in ["train","val"]: #phase_list : #['train', 'val']:
             if phase == 'train':
                 model.train()  # Set model to training mode
             else:
@@ -54,15 +64,25 @@ def train_regular_ce(model,
             running_loss = 0.0
             running_corrects = 0
 
-            for inputs, labels in data_loader_dict[phase]:
-                inputs = inputs.to(device)
-                labels = labels.to(device)
+            # len(data_loader_dict['train'] = 782
+            # 782 * 64 = 50048
+
+            # len(data_loader_dict['val'] = 157
+            # 157 * 64 = 10048
+            for inputs, labels in data_loader_dict[phase]: # phase = train or val
+                inputs = inputs.to(device) # torch.Size([64, 3, 32, 32])
+                labels = labels.to(device) # torch.Size([64])
 
                 with torch.set_grad_enabled(phase == 'train'):
                     optimizer.zero_grad()
+
                     model_outputs = model(inputs)
-                    if isinstance(model_outputs,tuple):
-                        _, preds = torch.max(model_outputs[0], 1)
+                    # model_outputs[0].shape
+                    # torch.Size([64, 100])
+
+                    if isinstance(model_outputs, tuple):
+                        # len(preds) = 64
+                        _, preds = torch.max(model_outputs[0], 1) # preds = tensor([68, 58....
                         loss = criterion(model_outputs[0], labels)
                     else:
                         _, preds = torch.max(model_outputs, 1)
@@ -75,6 +95,10 @@ def train_regular_ce(model,
 
                 running_loss += loss.item() * inputs.size(0)
                 running_corrects += torch.sum(preds == labels.data)
+
+            # end for
+
+
             if phase == 'train' and scheduler != None:
                 scheduler.step()
 
@@ -83,13 +107,16 @@ def train_regular_ce(model,
                 previous_loss = epoch_loss
 
             epoch_acc = running_corrects * 1.0 / dataset_sizes[phase]
+
             if best_val_acc == 0.0 and phase == "val":
                 best_val_acc = epoch_acc
+
             if best_train_acc == 0.0  and phase == "train":
                 best_train_acc = epoch_acc
 
             print('{} Loss: {:.4f}  ACC: {:.4f}'.format(
-                phase, epoch_loss,epoch_acc))
+                phase, epoch_loss, epoch_acc))
+
             if phase == "train":
                 train_acc_dict[(epochs + 1 )] = epoch_acc
                 train_loss_dict[(epoch + 1 )] = epoch_loss
@@ -99,12 +126,12 @@ def train_regular_ce(model,
 
             if phase == "val" and epoch_acc > best_val_acc:
                 best_val_acc = epoch_acc
+                print('Best VAL Acc: {:4f}'.format(best_val_acc))
 
             # deep copy the model
             if phase == 'val' and previous_loss >= epoch_loss:
                 previous_loss = epoch_loss
-
-                torch.save(model.state_dict(),path_to_save)
+                torch.save(model.state_dict(), path_to_save)
                 best_model_wts = copy.deepcopy(model.state_dict())
             elif phase == "val"  and previous_loss < epoch_loss:
                 print("Previous Validation Loss is smaller!")
@@ -117,14 +144,8 @@ def train_regular_ce(model,
     # load best model weights
     model.load_state_dict(best_model_wts)
     model.eval()
+
     return model
-
-
-
-
-
-
-
 
 
 

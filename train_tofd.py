@@ -1,20 +1,18 @@
+# Reference : https://github.com/ArchipLab-LinfengZhang/Task-Oriented-Feature-Distillation
 
-
-#Reference : https://github.com/ArchipLab-LinfengZhang/Task-Oriented-Feature-Distillation
-
-
-from tofd_utils import *
-from resnet_cifar_tofd import *
-from models.OOG_resnet import ResNet34,ResNet18
-from models.MobileNetV2_CIFAR import MobileNetV2
-from dataloader import get_train_valid_loader_cifars,get_test_loader_cifar
-from benchmarks.tofd.tofd_resnets import resnet34
+from TOFD.tofd_utils import *
+from TOFD.resnet_cifar_tofd import *
+from models_repo.massive_resnets import ResNet34,ResNet18
+# from models.MobileNetV2_CIFAR import MobileNetV2
+from TOFD.dataloader import get_train_valid_loader_cifars,get_test_loader_cifar
+from TOFD.tofd_resnets import resnet34
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 parser = argparse.ArgumentParser(description='Task-Oriented Feature Distillation. ')
 parser.add_argument('--model', default="res8", help="choose the student model", type=str)
 parser.add_argument('--dataset', default="cifar100", type=str, help="cifar10/cifar100")
+parser.add_argument('--saved_path', default=".", type=str, help="Saved path for the teacher")
 parser.add_argument('--alpha', default=0.05, type=float)
 parser.add_argument('--beta', default=0.03, type=float)
 parser.add_argument('--l2', default=7e-3, type=float)
@@ -89,17 +87,17 @@ elif args.teacher == 'resnet20':
     teacher = resnet20_cifar(seed=args.seed,num_classes=NUM_ClASSES)
 
 
-teacher.load_state_dict(torch.load("./teacher/" + args.teacher + ".pth"))
+teacher.load_state_dict(torch.load(args.saved_path),strict=False)
 saved_teacher_state_dict = ()
 temp_dict = {}
 
 full_modules_state_dict = {}
-saved_state_dict = torch.load(teacher_path)
+saved_state_dict = torch.load(args.saved_path)
 testing_state_dict = {}
 for (key, value), (key_saved, value_saved) in zip(teacher.state_dict().items(), saved_state_dict.items()):
     testing_state_dict[key] = value_saved
     full_modules_state_dict["core." + key] = value_saved
-teacher.load_state_dict(testing_state_dict)
+teacher.load_state_dict(testing_state_dict, strict=False)
 
 
 teacher.cuda()
